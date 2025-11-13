@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeamPick - Pembagian Kelompok Otomatis</title>
+    <title>Splitter</title>
     <style>
         * {
             margin: 0;
@@ -124,12 +124,12 @@
 
         .participant-item {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
-            padding: 10px;
+            padding: 8px;
             background: linear-gradient(to right, #f8f9fa 0%, #f1f3f5 100%);
             border: 1px solid #e1e8ed;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             border-radius: 4px;
             transition: all 0.2s ease;
         }
@@ -141,36 +141,62 @@
 
         .participant-item input[type="text"] {
             flex: 1;
-            padding: 8px 10px;
+            padding: 6px 10px;
             border: 1px solid #c8d6e5;
             background: white;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             border-radius: 4px;
         }
 
         .gender-radio-group {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .gender-radio-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            background: linear-gradient(to right, #f8f9fa 0%, #f1f3f5 100%);
+            min-height: 32px;
+        }
+
+        .gender-radio-item:hover {
+            background: linear-gradient(to right, #f1f3f5 0%, #e9ecef 100%);
+            border-color: #5a6c7d;
+            transform: translateY(-1px);
+        }
+
+        .gender-radio-item:has(input[type="radio"]:checked) {
+            background: linear-gradient(135deg, #e8edf3 0%, #d8e3ed 100%);
+            border-color: #2c3e50;
+            box-shadow: 0 2px 6px rgba(44, 62, 80, 0.15);
         }
 
         .gender-radio-item input[type="radio"] {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
+            margin: 0;
+            flex-shrink: 0;
+            accent-color: #2c3e50;
         }
 
         .gender-radio-item label {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             cursor: pointer;
             user-select: none;
+            margin: 0;
+            padding: 0;
+            flex: 1;
+            white-space: nowrap;
         }
 
         .form-input.error {
@@ -214,13 +240,36 @@
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             color: white;
             border-color: #c0392b;
-            padding: 6px 12px;
-            font-size: 0.85rem;
+            padding: 6px 10px;
+            font-size: 0.9rem;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-danger:hover {
             background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
             box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-clear-gender {
+            background: transparent;
+            color: #7f8c8d;
+            border: 1px solid #bdc3c7;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            min-width: auto;
+            height: 24px;
+            line-height: 1;
+            border-radius: 3px;
+        }
+
+        .btn-clear-gender:hover {
+            background: #ecf0f1;
+            color: #e74c3c;
+            border-color: #e74c3c;
         }
 
         .btn-success {
@@ -583,12 +632,162 @@
         .copy-success.slide-out {
             animation: slideOutRight 0.3s ease-out forwards;
         }
+
+        /* Custom Modal Dialog */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease-out;
+            backdrop-filter: blur(2px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-overlay.hide {
+            animation: fadeOut 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-30px) scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalSlideOut {
+            from {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-30px) scale(0.95);
+                opacity: 0;
+            }
+        }
+
+        .modal-dialog {
+            background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 0;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.2);
+            animation: modalSlideIn 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        .modal-dialog.closing {
+            animation: modalSlideOut 0.3s ease-out forwards;
+        }
+
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid #e1e8ed;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-header .modal-icon {
+            font-size: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 25px;
+            color: #333;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .modal-footer {
+            padding: 15px 25px;
+            border-top: 1px solid #e1e8ed;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+        }
+
+        .modal-footer .btn {
+            min-width: 100px;
+            padding: 10px 20px;
+        }
+
+        @media (max-width: 640px) {
+            .modal-dialog {
+                width: 95%;
+                max-width: none;
+            }
+
+            .modal-header {
+                padding: 18px 20px;
+            }
+
+            .modal-header h3 {
+                font-size: 1.1rem;
+            }
+
+            .modal-body {
+                padding: 20px;
+                font-size: 0.95rem;
+            }
+
+            .modal-footer {
+                padding: 12px 20px;
+                flex-direction: column-reverse;
+            }
+
+            .modal-footer .btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>TeamPick</h1>
+            <h1>Splitter</h1>
             <p>Pembagian Kelompok Dengan Cara Yang Berbeda</p>
         </div>
 
@@ -731,10 +930,110 @@
 
     <div id="alertContainer"></div>
 
+    <!-- Custom Modal Dialog -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-dialog" id="modalDialog">
+            <div class="modal-header" id="modalHeader">
+                <h3>
+                    <span class="modal-icon" id="modalIcon">⚠️</span>
+                    <span id="modalTitle">Konfirmasi</span>
+                </h3>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <p id="modalMessage">Apakah Anda yakin?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="modalCancelBtn">Batal</button>
+                <button class="btn btn-primary" id="modalConfirmBtn">Ya</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // State management
         let participants = [];
         let groups = [];
+
+        // Custom Confirm Dialog
+        function showConfirm(message, title = 'Konfirmasi', icon = '⚠️') {
+            return new Promise((resolve) => {
+                const overlay = document.getElementById('modalOverlay');
+                const dialog = document.getElementById('modalDialog');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalIcon = document.getElementById('modalIcon');
+                const modalMessage = document.getElementById('modalMessage');
+                const confirmBtn = document.getElementById('modalConfirmBtn');
+                const cancelBtn = document.getElementById('modalCancelBtn');
+
+                // Set content
+                modalTitle.textContent = title;
+                modalIcon.textContent = icon;
+                modalMessage.textContent = message;
+
+                // Show modal
+                overlay.classList.add('show');
+
+                // Focus on confirm button by default (for Enter key support)
+                setTimeout(() => {
+                    confirmBtn.focus();
+                }, 100);
+
+                let isResolved = false;
+
+                function closeModal(result) {
+                    if (isResolved) return;
+                    isResolved = true;
+                    
+                    dialog.classList.add('closing');
+                    overlay.classList.add('hide');
+                    
+                    // Remove event listeners
+                    confirmBtn.removeEventListener('click', confirmHandler);
+                    cancelBtn.removeEventListener('click', cancelHandler);
+                    overlay.removeEventListener('click', overlayHandler);
+                    document.removeEventListener('keydown', keyHandler);
+                    
+                    setTimeout(() => {
+                        overlay.classList.remove('show', 'hide');
+                        dialog.classList.remove('closing');
+                        resolve(result);
+                    }, 300);
+                }
+
+                // Event handlers
+                function confirmHandler() {
+                    closeModal(true);
+                }
+
+                function cancelHandler() {
+                    closeModal(false);
+                }
+
+                function overlayHandler(e) {
+                    if (e.target === overlay) {
+                        closeModal(false);
+                    }
+                }
+
+                function keyHandler(e) {
+                    if (e.key === 'Escape') {
+                        // Escape key = Cancel (No)
+                        e.preventDefault();
+                        closeModal(false);
+                    } else if (e.key === 'Enter') {
+                        // Enter key = Confirm (Yes)
+                        e.preventDefault();
+                        closeModal(true);
+                    }
+                }
+
+                // Add event listeners
+                confirmBtn.addEventListener('click', confirmHandler);
+                cancelBtn.addEventListener('click', cancelHandler);
+                overlay.addEventListener('click', overlayHandler);
+                document.addEventListener('keydown', keyHandler);
+            });
+        }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
@@ -842,7 +1141,36 @@
                     name: nameInput.value.trim(),
                     gender: selectedGender ? selectedGender.value : ''
                 };
+                
+                // Update the clear gender button visibility
+                updateClearGenderButton(index);
                 updateInfo();
+            }
+        }
+
+        // Update clear gender button for a specific participant
+        function updateClearGenderButton(index) {
+            const genderRadioGroup = document.querySelector(`.gender-radio-group[data-index="${index}"]`);
+            if (!genderRadioGroup) return;
+            
+            const existingButton = genderRadioGroup.querySelector('.btn-clear-gender');
+            const participant = participants[index];
+            
+            if (participant && participant.gender && participant.gender !== '') {
+                // If gender exists and button doesn't exist, create it
+                if (!existingButton) {
+                    const clearBtn = document.createElement('button');
+                    clearBtn.className = 'btn btn-clear-gender';
+                    clearBtn.setAttribute('onclick', `clearGender(${index})`);
+                    clearBtn.setAttribute('title', 'Hapus jenis kelamin');
+                    clearBtn.innerHTML = '×';
+                    genderRadioGroup.appendChild(clearBtn);
+                }
+            } else {
+                // If no gender, remove button if it exists
+                if (existingButton) {
+                    existingButton.remove();
+                }
             }
         }
 
@@ -851,6 +1179,15 @@
             participants.splice(index, 1);
             renderParticipants();
             updateInfo();
+        }
+
+        // Clear gender for a participant
+        function clearGender(index) {
+            if (index >= 0 && index < participants.length) {
+                participants[index].gender = '';
+                renderParticipants();
+                updateInfo();
+            }
         }
 
         // Render participants
@@ -884,30 +1221,37 @@
                            onkeydown="handleParticipantKeydown(event, ${index})"
                            onblur="validateParticipantName(${index})">
                     <div class="gender-radio-group" data-index="${index}">
-                        <div class="gender-radio-item">
+                        <div class="gender-radio-item" onclick="document.getElementById('putra-${index}').click();">
                             <input type="radio" 
                                    id="putra-${index}" 
                                    name="gender-${index}" 
                                    value="putra"
                                    ${p.gender === 'putra' ? 'checked' : ''}
-                                   onchange="updateParticipant(${index})">
-                            <label for="putra-${index}">Putra</label>
+                                   onchange="updateParticipant(${index})"
+                                   onclick="event.stopPropagation();">
+                            <label for="putra-${index}" onclick="event.stopPropagation();">Putra</label>
                         </div>
-                        <div class="gender-radio-item">
+                        <div class="gender-radio-item" onclick="document.getElementById('putri-${index}').click();">
                             <input type="radio" 
                                    id="putri-${index}" 
                                    name="gender-${index}" 
                                    value="putri"
                                    ${p.gender === 'putri' ? 'checked' : ''}
-                                   onchange="updateParticipant(${index})">
-                            <label for="putri-${index}">Putri</label>
+                                   onchange="updateParticipant(${index})"
+                                   onclick="event.stopPropagation();">
+                            <label for="putri-${index}" onclick="event.stopPropagation();">Putri</label>
                         </div>
                     </div>
-                    <button class="btn btn-danger" onclick="removeParticipant(${index})">
+                    <button class="btn btn-danger" onclick="removeParticipant(${index})" title="Hapus peserta">
                         ✕
                     </button>
                 `;
                 participantList.appendChild(item);
+            });
+            
+            // Update clear gender buttons for all participants after rendering
+            participants.forEach((p, index) => {
+                updateClearGenderButton(index);
             });
         }
 
@@ -1396,8 +1740,14 @@
         }
 
         // Reset all
-        function resetAll() {
-            if (confirm('Apakah Anda yakin ingin mereset semua data?')) {
+        async function resetAll() {
+            const confirmed = await showConfirm(
+                'Apakah Anda yakin ingin mereset semua data?',
+                'Konfirmasi Reset',
+                '⚠️'
+            );
+            
+            if (confirmed) {
                 participants = [];
                 groups = [];
                 document.getElementById('participantList').innerHTML = '';
@@ -1433,65 +1783,31 @@
             try {
                 let textContent = '';
                 const lineBreak = '\r\n';
-                const separator = '═'.repeat(70);
-                const thinSeparator = '─'.repeat(70);
-                
-                // Helper function to pad string
-                function padString(str, width, align = 'left') {
-                    str = String(str || '');
-                    if (align === 'center') {
-                        const padding = Math.floor((width - str.length) / 2);
-                        return ' '.repeat(padding) + str + ' '.repeat(width - str.length - padding);
-                    } else if (align === 'right') {
-                        return ' '.repeat(width - str.length) + str;
-                    } else {
-                        return str + ' '.repeat(width - str.length);
-                    }
-                }
                 
                 // Prepare data for each group
                 groups.forEach((group, groupIndex) => {
-                    // Title
-                    textContent += lineBreak;
-                    textContent += separator + lineBreak;
-                    const title = 'KELOMPOK ' + (groupIndex + 1);
-                    const titlePadding = Math.floor((70 - title.length) / 2);
-                    textContent += ' '.repeat(titlePadding) + title + lineBreak;
-                    textContent += separator + lineBreak;
-                    textContent += lineBreak;
-                    
-                    // Table header
-                    const colWidths = { no: 6, nama: 40, gender: 20 };
-                    textContent += thinSeparator + lineBreak;
-                    textContent += '│ ' + padString('No', colWidths.no, 'center') + ' │ ';
-                    textContent += padString('Nama', colWidths.nama, 'left') + ' │ ';
-                    textContent += padString('Jenis Kelamin', colWidths.gender, 'center') + ' │' + lineBreak;
-                    textContent += thinSeparator + lineBreak;
+                    // Group title
+                    const groupTitle = 'KELOMPOK ' + (groupIndex + 1);
+                    textContent += groupTitle + lineBreak;
+                    textContent += '='.repeat(groupTitle.length) + lineBreak;
                     
                     // Add participants
                     group.forEach((participant, index) => {
-                        const no = String(index + 1);
-                        const name = participant.name || '';
-                        const gender = participant.gender || '-';
-                        
-                        textContent += '│ ' + padString(no, colWidths.no, 'center') + ' │ ';
-                        textContent += padString(name, colWidths.nama, 'left') + ' │ ';
-                        textContent += padString(gender, colWidths.gender, 'center') + ' │' + lineBreak;
+                        const name = participant.name || 'Tanpa Nama';
+                        const gender = participant.gender ? ` (${participant.gender})` : '';
+                        textContent += `${index + 1}. ${name}${gender}` + lineBreak;
                     });
                     
-                    textContent += thinSeparator + lineBreak;
-                    textContent += lineBreak;
-                    
-                    // Summary
+                    // Group summary
                     const maleCount = group.filter(p => p.gender === 'putra').length;
                     const femaleCount = group.filter(p => p.gender === 'putri').length;
                     
-                    textContent += 'RINGKASAN:' + lineBreak;
-                    textContent += thinSeparator + lineBreak;
-                    textContent += 'Total          : ' + group.length + ' orang' + lineBreak;
-                    textContent += 'Putra          : ' + maleCount + ' orang' + lineBreak;
-                    textContent += 'Putri          : ' + femaleCount + ' orang' + lineBreak;
-                    textContent += thinSeparator + lineBreak;
+                    textContent += lineBreak;
+                    textContent += 'Ringkasan:' + lineBreak;
+                    textContent += `- Total: ${group.length} orang` + lineBreak;
+                    textContent += `- Putra: ${maleCount} orang` + lineBreak;
+                    textContent += `- Putri: ${femaleCount} orang` + lineBreak;
+                    textContent += lineBreak;
                     textContent += lineBreak;
                 });
                 
@@ -1505,15 +1821,14 @@
                 );
                 const avgPerGroup = groups.length > 0 ? (totalParticipants / groups.length).toFixed(2) : 0;
                 
-                textContent += separator + lineBreak;
-                textContent += 'RINGKASAN KESELURUHAN' + lineBreak;
-                textContent += separator + lineBreak;
-                textContent += 'Total Peserta      : ' + totalParticipants + ' orang' + lineBreak;
-                textContent += 'Total Kelompok     : ' + groups.length + ' kelompok' + lineBreak;
-                textContent += 'Rata-rata/Kelompok : ' + avgPerGroup + ' orang' + lineBreak;
-                textContent += 'Total Putra        : ' + totalMale + ' orang' + lineBreak;
-                textContent += 'Total Putri        : ' + totalFemale + ' orang' + lineBreak;
-                textContent += separator + lineBreak;
+                const summaryTitle = 'RINGKASAN KESELURUHAN';
+                textContent += summaryTitle + lineBreak;
+                textContent += '='.repeat(summaryTitle.length) + lineBreak;
+                textContent += `Total Peserta: ${totalParticipants} orang` + lineBreak;
+                textContent += `Total Kelompok: ${groups.length} kelompok` + lineBreak;
+                textContent += `Rata-rata per Kelompok: ${avgPerGroup} orang` + lineBreak;
+                textContent += `Total Putra: ${totalMale} orang` + lineBreak;
+                textContent += `Total Putri: ${totalFemale} orang` + lineBreak;
                 
                 // Generate filename with timestamp
                 const now = new Date();
@@ -1539,7 +1854,7 @@
         }
 
         // Load groups from TXT file
-        function loadGroupsFromFile(event) {
+        async function loadGroupsFromFile(event) {
             const file = event.target.files[0];
             if (!file) return;
             
@@ -1547,10 +1862,17 @@
             
             if (!isTxt) {
                 showAlert('File harus berformat TXT!', 'error');
+                event.target.value = ''; // Reset file input
                 return;
             }
             
-            if (!confirm('Memuat data akan mengganti kelompok saat ini. Lanjutkan?')) {
+            const confirmed = await showConfirm(
+                'Memuat data akan mengganti kelompok saat ini. Lanjutkan?',
+                'Konfirmasi Import',
+                '📥'
+            );
+            
+            if (!confirmed) {
                 event.target.value = ''; // Reset file input
                 return;
             }
@@ -1607,20 +1929,99 @@
             reader.readAsText(file, 'UTF-8');
         }
         
-        // Parse TXT file format
+        // Parse TXT file format (supports both new simple format and old table format)
         function parseTxtFile(text) {
             const groups = [];
             const lines = text.split(/\r?\n/);
             let currentGroup = null;
+            let inSummarySection = false;
             let inTable = false;
-            let headerFound = false;
+            let isOldFormat = false;
+            
+            // Detect format: if file contains table characters (│), use old format parser
+            if (text.includes('│') || text.includes('═') || text.includes('─')) {
+                isOldFormat = true;
+            }
             
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i];
                 const trimmedLine = line.trim();
                 
+                // Skip empty lines
+                if (trimmedLine === '') {
+                    continue;
+                }
+                
+                // OLD FORMAT PARSER (table format)
+                if (isOldFormat) {
+                    // Check for group header (KELOMPOK X)
+                    const groupMatch = trimmedLine.match(/KELOMPOK\s+(\d+)/i);
+                    if (groupMatch) {
+                        // Save previous group if exists
+                        if (currentGroup && currentGroup.length > 0) {
+                            groups.push(currentGroup);
+                        }
+                        // Start new group
+                        currentGroup = [];
+                        inTable = false;
+                        continue;
+                    }
+                    
+                    // Check for table header row
+                    if (trimmedLine.includes('│') && (trimmedLine.includes('No') || trimmedLine.includes('Nama') || trimmedLine.includes('Jenis Kelamin'))) {
+                        inTable = true;
+                        continue;
+                    }
+                    
+                    // Skip table separator lines
+                    if (trimmedLine.match(/^[│\s─═]+$/) || trimmedLine.match(/^[═─]+$/)) {
+                        continue;
+                    }
+                    
+                    // Parse table data rows
+                    if (inTable && trimmedLine.includes('│') && currentGroup) {
+                        const parts = trimmedLine.split('│').map(p => p.trim()).filter(p => p && p !== '');
+                        
+                        if (parts.length >= 3) {
+                            const no = parts[0];
+                            const name = parts[1];
+                            const gender = parts[2].toLowerCase().trim();
+                            
+                            // Skip header row
+                            if (no.toLowerCase() === 'no' || name.toLowerCase() === 'nama') {
+                                continue;
+                            }
+                            
+                            // Skip if not a number
+                            const noNum = parseInt(no);
+                            if (isNaN(noNum)) {
+                                continue;
+                            }
+                            
+                            // Add participant
+                            if (name && name !== '-' && name !== '') {
+                                const cleanName = name.replace(/\s+/g, ' ').trim();
+                                const cleanGender = (gender === 'putra' || gender === 'putri') ? gender : '';
+                                
+                                currentGroup.push({
+                                    name: cleanName,
+                                    gender: cleanGender
+                                });
+                            }
+                        }
+                    }
+                    
+                    // Check for summary section (stops reading table data)
+                    if (trimmedLine.includes('RINGKASAN:') || trimmedLine.includes('RINGKASAN KESELURUHAN')) {
+                        inTable = false;
+                        continue;
+                    }
+                    continue; // Skip to next line for old format
+                }
+                
+                // NEW FORMAT PARSER (simple format)
                 // Check for group header (KELOMPOK X)
-                const groupMatch = trimmedLine.match(/KELOMPOK\s+(\d+)/i);
+                const groupMatch = trimmedLine.match(/^KELOMPOK\s+(\d+)$/i);
                 if (groupMatch) {
                     // Save previous group if exists
                     if (currentGroup && currentGroup.length > 0) {
@@ -1628,64 +2029,52 @@
                     }
                     // Start new group
                     currentGroup = [];
-                    inTable = false;
-                    headerFound = false;
+                    inSummarySection = false;
                     continue;
                 }
                 
-                // Check for table header row (contains "No", "Nama", "Jenis Kelamin")
-                if (trimmedLine.includes('│') && (trimmedLine.includes('No') || trimmedLine.includes('Nama') || trimmedLine.includes('Jenis Kelamin'))) {
-                    headerFound = true;
-                    inTable = true;
+                // Skip separator lines (lines with only = characters)
+                if (trimmedLine.match(/^=+$/)) {
                     continue;
                 }
                 
-                // Check for table separator (─ or ═) - skip these lines
-                if (trimmedLine.match(/^[│\s─═]+$/) || trimmedLine.match(/^[═─]+$/)) {
+                // Check if we're in summary section - stop reading participants
+                if (trimmedLine.toLowerCase() === 'ringkasan:' || 
+                    (trimmedLine.toLowerCase().includes('ringkasan') && !trimmedLine.toLowerCase().includes('keseluruhan'))) {
+                    inSummarySection = true;
                     continue;
                 }
                 
-                // Parse table data rows (format: │ No │ Nama │ Jenis Kelamin │)
-                if (inTable && trimmedLine.includes('│') && currentGroup) {
-                    // Extract data from table row by splitting on │
-                    const parts = trimmedLine.split('│').map(p => p.trim()).filter(p => p && p !== '');
-                    
-                    // Should have at least 3 parts: No, Nama, Jenis Kelamin
-                    if (parts.length >= 3) {
-                        const no = parts[0];
-                        const name = parts[1];
-                        const gender = parts[2].toLowerCase().trim();
+                // Check for overall summary section - stop processing
+                if (trimmedLine.toUpperCase() === 'RINGKASAN KESELURUHAN') {
+                    // Save last group before overall summary
+                    if (currentGroup && currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                        currentGroup = null;
+                    }
+                    break;
+                }
+                
+                // Skip summary lines (lines starting with "-")
+                if (inSummarySection && trimmedLine.startsWith('-')) {
+                    continue;
+                }
+                
+                // Parse participant line (format: "1. Nama (gender)" or "1. Nama")
+                if (currentGroup && !inSummarySection) {
+                    const participantMatch = trimmedLine.match(/^\d+\.\s+(.+?)(?:\s+\((\w+)\))?$/);
+                    if (participantMatch) {
+                        const name = participantMatch[1].trim();
+                        const gender = participantMatch[2] ? participantMatch[2].toLowerCase().trim() : '';
                         
-                        // Skip header row
-                        if (no.toLowerCase() === 'no' || name.toLowerCase() === 'nama') {
-                            continue;
-                        }
-                        
-                        // Skip if it's not a number in first column
-                        const noNum = parseInt(no);
-                        if (isNaN(noNum)) {
-                            continue;
-                        }
-                        
-                        // Add participant to current group
-                        if (name && name !== '-' && name !== '') {
-                            // Clean up name (remove extra spaces)
-                            const cleanName = name.replace(/\s+/g, ' ').trim();
+                        if (name && name !== 'Tanpa Nama') {
                             const cleanGender = (gender === 'putra' || gender === 'putri') ? gender : '';
-                            
                             currentGroup.push({
-                                name: cleanName,
+                                name: name,
                                 gender: cleanGender
                             });
                         }
                     }
-                }
-                
-                // Check for summary section (stops reading table data)
-                if (trimmedLine.includes('RINGKASAN:') || trimmedLine.includes('RINGKASAN KESELURUHAN')) {
-                    inTable = false;
-                    // Don't break, continue to next group if any
-                    continue;
                 }
             }
             
