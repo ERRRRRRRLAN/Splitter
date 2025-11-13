@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Splitter</title>
     <style>
         * {
@@ -17,6 +17,12 @@
             min-height: 100vh;
             padding: 20px;
             color: #333;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
         }
 
         .container {
@@ -52,9 +58,52 @@
             margin-bottom: 30px;
         }
 
+        /* Tablet and below */
         @media (max-width: 968px) {
             .main-content {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        /* Mobile landscape and below */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 100%;
+            }
+
+            .header {
+                margin-bottom: 20px;
+                padding: 15px 0;
+            }
+
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .header p {
+                font-size: 0.9rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+                margin-bottom: 16px;
+            }
+
+            .main-content {
+                gap: 16px;
+                margin-bottom: 20px;
+            }
+
+            .stats-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .groups-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
         }
 
@@ -212,6 +261,9 @@
             font-family: inherit;
             display: inline-block;
             border-radius: 4px;
+            min-height: 44px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-primary {
@@ -242,8 +294,9 @@
             border-color: #c0392b;
             padding: 6px 10px;
             font-size: 0.9rem;
-            min-width: 32px;
-            height: 32px;
+            min-width: 36px;
+            min-height: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -258,12 +311,16 @@
             background: transparent;
             color: #7f8c8d;
             border: 1px solid #bdc3c7;
-            padding: 2px 6px;
-            font-size: 0.7rem;
-            min-width: auto;
-            height: 24px;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            min-width: 28px;
+            min-height: 28px;
+            height: 28px;
             line-height: 1;
             border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-clear-gender:hover {
@@ -571,40 +628,222 @@
             flex-wrap: wrap;
         }
 
+        /* Mobile portrait */
         @media (max-width: 640px) {
             .header h1 {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
+            }
+
+            .header p {
+                font-size: 0.85rem;
             }
 
             .card {
-                padding: 18px;
+                padding: 16px;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+                margin-bottom: 14px;
             }
 
             .main-content {
-                gap: 15px;
+                gap: 12px;
+            }
+
+            .form-group {
+                margin-bottom: 14px;
+            }
+
+            .form-label {
+                font-size: 0.9rem;
+            }
+
+            .form-input {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+
+            .participant-item {
+                flex-wrap: wrap;
+                padding: 10px;
+                gap: 8px;
+            }
+
+            .participant-item input[type="text"] {
+                min-width: 0;
+                width: 100%;
+                order: 1;
+            }
+
+            .gender-radio-group {
+                order: 2;
+                width: 100%;
+                gap: 6px;
+            }
+
+            .gender-radio-item {
+                flex: 1;
+                min-width: 0;
+                padding: 5px 8px;
+                font-size: 0.85rem;
+            }
+
+            .gender-radio-item label {
+                font-size: 0.85rem;
+            }
+
+            .participant-item .btn-danger {
+                order: 3;
+                flex-shrink: 0;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .action-buttons .btn {
+                width: 100%;
+                min-height: 44px;
+            }
+
+            .stats-summary {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 12px;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
             }
 
             .groups-container {
                 grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .group-card {
+                padding: 14px;
+            }
+
+            .group-title {
+                font-size: 1.1rem;
+            }
+
+            .group-stats {
+                font-size: 0.8rem;
+            }
+
+            .min-gender-inputs {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                padding: 12px;
+            }
+
+            .checkbox-group {
+                gap: 6px;
+                margin-bottom: 10px;
+            }
+
+            .checkbox-group label {
+                font-size: 0.85rem;
+            }
+
+            .empty-state {
+                padding: 30px 20px;
+                font-size: 0.9rem;
             }
 
             #alertContainer {
-                bottom: 15px;
-                right: 15px;
-                left: 15px;
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
                 max-width: none;
             }
 
             .alert {
                 min-width: auto;
                 max-width: none;
+                padding: 10px 14px;
+                font-size: 0.9rem;
             }
 
             .copy-success {
-                bottom: 15px;
-                right: 15px;
-                left: 15px;
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
                 min-width: auto;
+                padding: 10px 14px;
+            }
+        }
+
+        /* Small mobile */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.3rem;
+            }
+
+            .header p {
+                font-size: 0.8rem;
+            }
+
+            .card {
+                padding: 14px;
+            }
+
+            .card-title {
+                font-size: 1rem;
+                margin-bottom: 12px;
+            }
+
+            .stats-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .gender-radio-item {
+                padding: 4px 6px;
+                min-height: 28px;
+            }
+
+            .gender-radio-item input[type="radio"] {
+                width: 16px;
+                height: 16px;
+            }
+
+            .btn-clear-gender {
+                min-height: 32px;
+                height: 32px;
+                padding: 4px 6px;
+                font-size: 0.7rem;
+            }
+
+            .participant-item .btn-danger {
+                min-width: 36px;
+                min-height: 36px;
+                height: 36px;
+                padding: 4px 8px;
+                font-size: 0.85rem;
+            }
+
+            .empty-state {
+                padding: 25px 15px;
+                font-size: 0.85rem;
+            }
+
+            .empty-state div:first-child {
+                font-size: 2rem !important;
+            }
+
+            .participant-list {
+                max-height: 300px;
             }
         }
 
