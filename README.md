@@ -1,4 +1,3 @@
-[language]
 # Splitter - Aplikasi Pembagian Kelompok
 
 Aplikasi web untuk membagi peserta ke dalam kelompok secara otomatis dan acak dengan berbagai opsi pengaturan gender dan distribusi yang seimbang.
