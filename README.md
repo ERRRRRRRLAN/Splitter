@@ -1,5 +1,12 @@
 # Splitter - Aplikasi Pembagian Kelompok
 
+## 🌐 Bahasa / Language
+
+- 🇮🇩 [Bahasa Indonesia](#deskripsi) (Current / Saat ini)
+- 🇬🇧 [English](#description)
+
+---
+
 Aplikasi web untuk membagi peserta ke dalam kelompok secara otomatis dan acak dengan berbagai opsi pengaturan gender dan distribusi yang seimbang.
 
 ## 📋 Deskripsi
@@ -212,5 +219,225 @@ Jika Anda ingin berkontribusi atau melaporkan bug, silakan buat issue atau pull 
 
 ---
 
-**Dibuat dan dikembangkan oleh Erlan Nauval Aqilah**
+# Splitter - Group Division Application
 
+## 🌐 Language / Bahasa
+
+- 🇬🇧 [English](#description) (Current / Saat ini)
+- 🇮🇩 [Bahasa Indonesia](#deskripsi)
+
+---
+
+Web application for automatically and randomly dividing participants into groups with various gender settings and balanced distribution options.
+
+## 📋 Description
+
+Splitter is a web application based on HTML, CSS, and JavaScript that allows you to:
+- Automatically divide participants into multiple groups
+- Configure distribution based on gender (Male/Female)
+- Provide custom names for each group
+- Save results in various formats (PNG Image, TXT File)
+- Import previously saved data
+
+## ✨ Main Features
+
+### 1. **Data Title (Optional)**
+- Add a title for your group data
+- If not filled, will automatically use "Untitled"
+- Title will appear in all outputs (results, images, TXT files)
+
+### 2. **Participant Management**
+- Easily add participants
+- Select gender for each participant (Male/Female) - optional
+- Remove unnecessary participants
+- Participant name validation
+
+### 3. **Gender Settings**
+- **Separate by gender**: Separates Male and Female into separate groups
+- **Minimum gender per group**: Set minimum number of Male/Female per group for balanced distribution
+
+### 4. **Group Naming**
+- Each group can be given a custom name
+- Edit group name directly in the division results
+- Group names are saved and appear in all outputs
+
+### 5. **Update Groups**
+- "Create Groups" button automatically changes to "Update Groups" after results are displayed
+- Update existing groups with new participant additions/deletions
+- Maintains existing group structure
+
+### 6. **Export & Import Data**
+- **Save as Image**: Export results as PNG file for display/printing
+- **Save as TXT**: Export results as text file that can be imported back
+- **Import Data**: Load data from previously saved TXT file
+  - Loads data title
+  - Loads custom group names
+  - Loads all participants with gender
+
+### 7. **Additional Features**
+- Copy results to clipboard
+- Randomize group division again
+- Reset all data
+- Real-time statistics (Total Participants, Number of Groups, Average per Group)
+
+## 🚀 How to Use
+
+### Data Preparation
+
+1. **Data Title (Optional)**
+   - Enter a title for your group data
+   - If not filled, will automatically use "Untitled"
+
+2. **Enter Number of Groups**
+   - Determine how many groups you want
+
+3. **Add Participants**
+   - Click "Add Participant" button or press **Enter** after typing name
+   - Select gender for each participant (Male/Female) - optional
+
+4. **Gender Settings (Optional)**
+   - **Separate by gender**: Activate if you want Male and Female separated
+   - **Minimum gender per group**: Set minimum number of Male/Female per group
+
+### Creating Groups
+
+5. Click **"Create Groups"** to automatically and randomly divide participants
+
+### After Results Appear
+
+6. **Edit Group Name**
+   - Click on the group name input field in each group card
+   - Change name as desired
+   - Press Enter or click outside to save
+
+7. **Update Groups**
+   - Button will automatically change to **"Update Groups"**
+   - Click to update groups with participant changes (add/remove)
+
+8. **Other Actions**
+   - **Copy Results**: Copy results to clipboard
+   - **Randomize Again**: Create new random division
+   - **Save as Image**: Export as PNG
+   - **Save as TXT**: Export as text file that can be imported
+
+### Import Data
+
+9. **Import Group Data**
+   - Click **"Import Group Data (TXT)"** button
+   - Select previously saved TXT file
+   - Data will be loaded: title, group names, and all participants
+
+### Reset
+
+10. Click **"Reset All"** to delete all data and start from scratch
+
+## 📁 File Structure
+
+```
+Splitter/
+├── index.html           # Main application file
+└── README.md           # Project documentation
+```
+
+## 🛠️ Technology
+
+- **HTML5**: Application structure
+- **CSS3**: Responsive styling and layout
+- **JavaScript (Vanilla)**: Application logic and DOM manipulation
+- **Canvas API**: For PNG image export
+
+## 📱 Responsive Design
+
+Application is designed responsively and can be used on:
+- Desktop
+- Tablet
+- Mobile device
+
+## 💾 File Format
+
+### Export TXT
+Saved TXT file has the format:
+```
+DATA TITLE
+==========
+
+Group 1
+==========
+1. Participant Name (male)
+2. Participant Name (female)
+...
+
+Summary:
+- Total: X people
+- Male: X people
+- Female: X people
+
+...
+
+OVERALL SUMMARY
+=====================
+Total Participants: X people
+Total Groups: X groups
+...
+```
+
+### Import TXT
+Application can read TXT format it generates itself, including:
+- Data title
+- Custom group names
+- Participant list with gender
+- Per-group summary
+
+## ⚙️ Division Algorithm
+
+Application uses several division algorithms:
+
+1. **Simple Random Distribution**: Round-robin distribution for even distribution
+2. **Separate by Gender**: Separates Male and Female into separate groups
+3. **Minimum Gender**: Ensures each group has minimum Male/Female according to settings
+4. **Smart Update**: Adds new participants and removes deleted participants without changing existing group structure
+
+## 🎯 Use Cases
+
+This application is suitable for:
+- Study group division
+- Sports team division
+- Work group division
+- Class division
+- Events that require group division
+
+## 📝 Important Notes
+
+- **Import only from TXT file**: PNG image files cannot be imported as they require OCR
+- **TXT Format**: Use TXT files generated by the application for perfect import
+- **Group Names**: Group names can be changed anytime after results are displayed
+- **Update Groups**: Update feature maintains existing group structure and only adds/removes participants
+
+## 🔄 Version
+
+**Version 1.0** - Full features with:
+- Optional data title
+- Custom group naming
+- Group update
+- Export/Import data
+- Gender settings
+
+## 📄 License
+
+This project is free to use for personal and commercial purposes.
+
+## 👨‍💻 Development
+
+This application is developed using vanilla JavaScript without external frameworks, so:
+- Lightweight and fast
+- No build process required
+- Easy to deploy
+- Can run directly in browser
+
+## 🤝 Contribution
+
+If you want to contribute or report bugs, please create an issue or pull request.
+
+---
+
+**Created and developed by Erlan Nauval Aqilah**
