@@ -9,6 +9,7 @@
 
 Aplikasi web untuk membagi peserta ke dalam kelompok secara otomatis dan acak dengan berbagai opsi pengaturan gender dan distribusi yang seimbang.
 
+<a id="deskripsi"></a>
 ## 📋 Deskripsi
 
 Splitter adalah aplikasi web berbasis HTML, CSS, dan JavaScript yang memungkinkan Anda untuk:
@@ -230,6 +231,7 @@ Jika Anda ingin berkontribusi atau melaporkan bug, silakan buat issue atau pull 
 
 Web application for automatically and randomly dividing participants into groups with various gender settings and balanced distribution options.
 
+<a id="description"></a>
 ## 📋 Description
 
 Splitter is a web application based on HTML, CSS, and JavaScript that allows you to:
