@@ -27,7 +27,8 @@ Splitter adalah aplikasi web berbasis HTML, CSS, dan JavaScript yang memungkinka
 - Judul akan muncul di semua output (hasil, gambar, file TXT)
 
 ### 2. **Manajemen Peserta**
-- Tambah peserta dengan mudah
+- Tambah peserta dengan mudah (satu per satu)
+- **Tambah Peserta Secara Bulk**: Tambahkan banyak peserta sekaligus dengan mengetik nama, satu per baris
 - Pilih jenis kelamin untuk setiap peserta (Putra/Putri) - opsional
 - Hapus peserta yang tidak diperlukan
 - Validasi nama peserta
@@ -72,7 +73,16 @@ Splitter adalah aplikasi web berbasis HTML, CSS, dan JavaScript yang memungkinka
    - Tentukan berapa banyak kelompok yang diinginkan
 
 3. **Tambahkan Peserta**
-   - Klik tombol "Tambah Peserta" atau tekan **Enter** setelah mengetik nama
+   - **Cara 1 - Satu per satu**: Klik tombol "Tambah Peserta" atau tekan **Enter** setelah mengetik nama
+   - **Cara 2 - Bulk Add**: Gunakan fitur "Tambah Peserta Secara Bulk" untuk menambahkan banyak peserta sekaligus
+     - Ketik nama peserta di textarea, satu nama per baris
+     - Contoh:
+       ```
+       NAMA 1
+       NAMA 2
+       NAMA 3
+       ```
+     - Klik tombol "Tambah Semua Peserta" untuk menambahkan semua nama sekaligus
    - Pilih jenis kelamin untuk setiap peserta (Putra/Putri) - opsional
 
 4. **Pengaturan Gender (Opsional)**
@@ -128,10 +138,18 @@ Splitter/
 
 ## 📱 Responsive Design
 
-Aplikasi dirancang responsif dan dapat digunakan di:
-- Desktop
-- Tablet
-- Mobile device
+Aplikasi dirancang responsif dan dioptimalkan untuk berbagai ukuran layar:
+- **Desktop**: Layout 2 kolom dengan tampilan optimal
+- **Tablet (768px - 968px)**: Layout 1 kolom dengan grid responsif untuk kelompok
+- **Mobile (640px ke bawah)**: Layout vertikal penuh dengan elemen yang dioptimalkan
+- **Small Mobile (480px ke bawah)**: Font size dan spacing yang disesuaikan untuk layar kecil
+
+**Fitur Responsif:**
+- Textarea bulk add yang responsif di semua device
+- Group cards yang menyesuaikan dengan lebar layar
+- Input fields dan buttons yang mudah digunakan di touchscreen
+- Group members list dengan word-wrap untuk nama panjang
+- Statistik cards yang menyesuaikan jumlah kolom berdasarkan ukuran layar
 
 ## 💾 Format File
 
@@ -195,6 +213,11 @@ Aplikasi ini cocok untuk:
 
 ## 🔄 Versi
 
+**Versi 1.1** - Update dengan:
+- ✨ **Fitur Bulk Add Peserta**: Tambahkan banyak peserta sekaligus dengan textarea
+- 📱 **Perbaikan Responsivitas UI**: Optimasi untuk desktop, tablet, dan mobile device
+- 🎨 **UI Improvements**: Perbaikan layout dan styling untuk berbagai ukuran layar
+
 **Versi 1.0** - Fitur lengkap dengan:
 - Judul data opsional
 - Penamaan kelompok custom
@@ -249,7 +272,8 @@ Splitter is a web application based on HTML, CSS, and JavaScript that allows you
 - Title will appear in all outputs (results, images, TXT files)
 
 ### 2. **Participant Management**
-- Easily add participants
+- Easily add participants (one by one)
+- **Bulk Add Participants**: Add multiple participants at once by typing names, one per line
 - Select gender for each participant (Male/Female) - optional
 - Remove unnecessary participants
 - Participant name validation
@@ -294,7 +318,16 @@ Splitter is a web application based on HTML, CSS, and JavaScript that allows you
    - Determine how many groups you want
 
 3. **Add Participants**
-   - Click "Add Participant" button or press **Enter** after typing name
+   - **Method 1 - One by one**: Click "Add Participant" button or press **Enter** after typing name
+   - **Method 2 - Bulk Add**: Use "Bulk Add Participants" feature to add multiple participants at once
+     - Type participant names in the textarea, one name per line
+     - Example:
+       ```
+       NAME 1
+       NAME 2
+       NAME 3
+       ```
+     - Click "Add All Participants" button to add all names at once
    - Select gender for each participant (Male/Female) - optional
 
 4. **Gender Settings (Optional)**
@@ -350,10 +383,18 @@ Splitter/
 
 ## 📱 Responsive Design
 
-Application is designed responsively and can be used on:
-- Desktop
-- Tablet
-- Mobile device
+Application is designed responsively and optimized for various screen sizes:
+- **Desktop**: 2-column layout with optimal display
+- **Tablet (768px - 968px)**: 1-column layout with responsive grid for groups
+- **Mobile (640px and below)**: Full vertical layout with optimized elements
+- **Small Mobile (480px and below)**: Adjusted font sizes and spacing for small screens
+
+**Responsive Features:**
+- Responsive bulk add textarea on all devices
+- Group cards that adapt to screen width
+- Input fields and buttons optimized for touchscreen
+- Group members list with word-wrap for long names
+- Statistics cards that adjust column count based on screen size
 
 ## 💾 File Format
 
@@ -416,6 +457,11 @@ This application is suitable for:
 - **Update Groups**: Update feature maintains existing group structure and only adds/removes participants
 
 ## 🔄 Version
+
+**Version 1.1** - Update with:
+- ✨ **Bulk Add Participants Feature**: Add multiple participants at once with textarea
+- 📱 **UI Responsiveness Improvements**: Optimized for desktop, tablet, and mobile devices
+- 🎨 **UI Improvements**: Enhanced layout and styling for various screen sizes
 
 **Version 1.0** - Full features with:
 - Optional data title
