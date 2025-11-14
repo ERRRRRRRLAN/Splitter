@@ -1348,35 +1348,40 @@
                 <div class="form-group">
                     <h3 id="howToUseTitle" style="margin-bottom: 12px; color: #333; font-size: 1.1rem;">Cara Penggunaan:</h3>
                     <ol id="howToUseList" style="padding-left: 20px; line-height: 1.8; color: #666; font-size: 0.9rem;">
-                        <li><strong id="howToUseItem1">Judul Data (Opsional)</strong>: Masukkan judul untuk data kelompok Anda. Jika tidak diisi, akan menggunakan "Untitled" secara otomatis.</li>
-                        <li><strong id="howToUseItem2">Masukkan jumlah kelompok</strong> yang diinginkan</li>
-                        <li><strong id="howToUseItem3">Tambahkan peserta</strong> dengan tombol "Tambah Peserta" atau tekan <strong>Enter</strong> setelah mengetik nama. Atau gunakan fitur <strong>"Tambah Peserta Secara Bulk"</strong> untuk menambahkan banyak peserta sekaligus (satu nama per baris)</li>
-                        <li><strong id="howToUseItem4">Pilih jenis kelamin</strong> untuk setiap peserta (Putra/Putri) - opsional</li>
-                        <li><strong id="howToUseItem5">Pengaturan Gender</strong> (opsional):
+                        <li id="howToUseItem1">Masukkan <strong>judul data</strong> (opsional) untuk mengidentifikasi pembagian kelompok Anda</li>
+                        <li id="howToUseItem2">Tentukan <strong>jumlah kelompok</strong> yang ingin dibuat</li>
+                        <li id="howToUseItem3">Tambahkan peserta dengan dua cara:
                             <ul style="margin-top: 5px; padding-left: 20px; line-height: 1.6;">
-                                <li id="howToUseItem5a">Pisahkan kelompok berdasarkan gender (Putra dan Putri terpisah)</li>
-                                <li id="howToUseItem5b">Aktifkan minimal Putra/Putri per kelompok untuk distribusi seimbang</li>
+                                <li>Gunakan tombol <strong>"Tambah Peserta"</strong> atau tekan <strong>Enter</strong> setelah mengetik nama</li>
+                                <li>Gunakan fitur <strong>"Tambah Peserta Secara Bulk"</strong> untuk menambahkan banyak peserta sekaligus (satu nama per baris)</li>
                             </ul>
                         </li>
-                        <li id="howToUseItem6">Klik <strong>"Buat Kelompok"</strong> untuk membagi secara otomatis dan acak</li>
-                        <li><strong id="howToUseItem7">Setelah hasil muncul</strong>:
+                        <li id="howToUseItem4">Pilih <strong>jenis kelamin</strong> untuk setiap peserta (Putra/Putri) - opsional</li>
+                        <li id="howToUseItem5">Konfigurasi <strong>pengaturan gender</strong> (opsional):
                             <ul style="margin-top: 5px; padding-left: 20px; line-height: 1.6;">
-                                <li id="howToUseItem7a"><strong>Edit Nama Kelompok</strong>: Klik pada input field nama kelompok di setiap kartu kelompok untuk mengubah nama kelompok sesuai keinginan</li>
-                                <li id="howToUseItem7b">Klik <strong>"Update Kelompok"</strong> (tombol akan berubah otomatis dari "Buat Kelompok") untuk memperbarui kelompok yang sudah ada dengan perubahan peserta</li>
+                                <li id="howToUseItem5a">Aktifkan pemisahan berdasarkan gender untuk memisahkan Putra dan Putri</li>
+                                <li id="howToUseItem5b">Atur jumlah minimal Putra/Putri per kelompok untuk distribusi yang seimbang</li>
+                            </ul>
+                        </li>
+                        <li id="howToUseItem6">Klik tombol <strong>"Buat Kelompok"</strong> untuk memulai pembagian otomatis secara acak</li>
+                        <li id="howToUseItem7">Setelah hasil muncul, Anda dapat:
+                            <ul style="margin-top: 5px; padding-left: 20px; line-height: 1.6;">
+                                <li id="howToUseItem7a"><strong>Edit nama kelompok</strong> dengan mengklik field nama di setiap kartu kelompok</li>
+                                <li id="howToUseItem7b">Klik <strong>"Update Kelompok"</strong> untuk menyimpan perubahan nama atau peserta</li>
                                 <li id="howToUseItem7c">Klik <strong>"Salin Hasil"</strong> untuk menyalin hasil ke clipboard</li>
                                 <li id="howToUseItem7d">Klik <strong>"Acak Ulang"</strong> untuk membuat pembagian baru secara acak</li>
-                                <li id="howToUseItem7e">Klik <strong>"Simpan sebagai Gambar"</strong> untuk menyimpan hasil sebagai gambar PNG (untuk tampilan/print)</li>
-                                <li id="howToUseItem7f">Klik <strong>"Simpan sebagai TXT"</strong> untuk menyimpan hasil sebagai file teks yang bisa diimport kembali</li>
+                                <li id="howToUseItem7e">Klik <strong>"Simpan sebagai Gambar"</strong> untuk menyimpan hasil sebagai file PNG</li>
+                                <li id="howToUseItem7f">Klik <strong>"Simpan sebagai TXT"</strong> untuk menyimpan hasil sebagai file teks yang dapat diimport kembali</li>
                             </ul>
                         </li>
-                        <li><strong id="howToUseItem8">Import Data</strong>: 
+                        <li id="howToUseItem8">Untuk memuat data yang sudah disimpan:
                             <ul style="margin-top: 5px; padding-left: 20px; line-height: 1.6;">
-                                <li id="howToUseItem8a">Gunakan tombol <strong>"Import Data Kelompok (TXT)"</strong> untuk memuat data dari file TXT yang sebelumnya disimpan</li>
-                                <li id="howToUseItem8b">File TXT yang diimport akan memuat: judul data, nama kelompok, dan semua peserta dengan gender</li>
-                                <li id="howToUseItem8c">Setelah import, Anda bisa langsung melihat hasil atau melakukan perubahan</li>
+                                <li id="howToUseItem8a">Klik tombol <strong>"Import Data Kelompok (TXT)"</strong> dan pilih file TXT yang sebelumnya disimpan</li>
+                                <li id="howToUseItem8b">File TXT berisi: judul data, nama kelompok, dan semua peserta beserta gender</li>
+                                <li id="howToUseItem8c">Setelah import, hasil akan langsung ditampilkan dan Anda dapat melakukan perubahan</li>
                             </ul>
                         </li>
-                        <li id="howToUseItem9">Klik <strong>"Reset Semua"</strong> untuk menghapus semua data (peserta, kelompok, dan pengaturan) dan memulai dari awal</li>
+                        <li id="howToUseItem9">Klik tombol <strong>"Reset Semua"</strong> untuk menghapus semua data dan memulai dari awal</li>
                     </ol>
                 </div>
             </div>
@@ -1473,26 +1478,28 @@
                 totalGroups: 'Jumlah Kelompok',
                 avgPerGroup: 'Rata-rata/Kelompok',
                 howToUse: 'Cara Penggunaan:',
-                howToUse1: 'Judul Data (Opsional): Masukkan judul untuk data kelompok Anda. Jika tidak diisi, akan menggunakan "Untitled" secara otomatis.',
-                howToUse2: 'Masukkan jumlah kelompok yang diinginkan',
-                howToUse3: 'Tambahkan peserta dengan tombol "Tambah Peserta" atau tekan Enter setelah mengetik nama. Atau gunakan fitur "Tambah Peserta Secara Bulk" untuk menambahkan banyak peserta sekaligus (satu nama per baris)',
+                howToUse1: 'Masukkan judul data (opsional) untuk mengidentifikasi pembagian kelompok Anda',
+                howToUse2: 'Tentukan jumlah kelompok yang ingin dibuat',
+                howToUse3: 'Tambahkan peserta dengan dua cara:',
+                howToUse3a: 'Gunakan tombol "Tambah Peserta" atau tekan Enter setelah mengetik nama',
+                howToUse3b: 'Gunakan fitur "Tambah Peserta Secara Bulk" untuk menambahkan banyak peserta sekaligus (satu nama per baris)',
                 howToUse4: 'Pilih jenis kelamin untuk setiap peserta (Putra/Putri) - opsional',
-                howToUse5: 'Pengaturan Gender (opsional):',
-                howToUse5a: 'Pisahkan kelompok berdasarkan gender (Putra dan Putri terpisah)',
-                howToUse5b: 'Aktifkan minimal Putra/Putri per kelompok untuk distribusi seimbang',
-                howToUse6: 'Klik "Buat Kelompok" untuk membagi secara otomatis dan acak',
-                howToUse7: 'Setelah hasil muncul:',
-                howToUse7a: 'Edit Nama Kelompok: Klik pada input field nama kelompok di setiap kartu kelompok untuk mengubah nama kelompok sesuai keinginan',
-                howToUse7b: 'Klik "Update Kelompok" (tombol akan berubah otomatis dari "Buat Kelompok") untuk memperbarui kelompok yang sudah ada dengan perubahan peserta',
+                howToUse5: 'Konfigurasi pengaturan gender (opsional):',
+                howToUse5a: 'Aktifkan pemisahan berdasarkan gender untuk memisahkan Putra dan Putri',
+                howToUse5b: 'Atur jumlah minimal Putra/Putri per kelompok untuk distribusi yang seimbang',
+                howToUse6: 'Klik tombol "Buat Kelompok" untuk memulai pembagian otomatis secara acak',
+                howToUse7: 'Setelah hasil muncul, Anda dapat:',
+                howToUse7a: 'Edit nama kelompok dengan mengklik field nama di setiap kartu kelompok',
+                howToUse7b: 'Klik "Update Kelompok" untuk menyimpan perubahan nama atau peserta',
                 howToUse7c: 'Klik "Salin Hasil" untuk menyalin hasil ke clipboard',
                 howToUse7d: 'Klik "Acak Ulang" untuk membuat pembagian baru secara acak',
-                howToUse7e: 'Klik "Simpan sebagai Gambar" untuk menyimpan hasil sebagai gambar PNG (untuk tampilan/print)',
-                howToUse7f: 'Klik "Simpan sebagai TXT" untuk menyimpan hasil sebagai file teks yang bisa diimport kembali',
-                howToUse8: 'Import Data:',
-                howToUse8a: 'Gunakan tombol "Import Data Kelompok (TXT)" untuk memuat data dari file TXT yang sebelumnya disimpan',
-                howToUse8b: 'File TXT yang diimport akan memuat: judul data, nama kelompok, dan semua peserta dengan gender',
-                howToUse8c: 'Setelah import, Anda bisa langsung melihat hasil atau melakukan perubahan',
-                howToUse9: 'Klik "Reset Semua" untuk menghapus semua data (peserta, kelompok, dan pengaturan) dan memulai dari awal',
+                howToUse7e: 'Klik "Simpan sebagai Gambar" untuk menyimpan hasil sebagai file PNG',
+                howToUse7f: 'Klik "Simpan sebagai TXT" untuk menyimpan hasil sebagai file teks yang dapat diimport kembali',
+                howToUse8: 'Untuk memuat data yang sudah disimpan:',
+                howToUse8a: 'Klik tombol "Import Data Kelompok (TXT)" dan pilih file TXT yang sebelumnya disimpan',
+                howToUse8b: 'File TXT berisi: judul data, nama kelompok, dan semua peserta beserta gender',
+                howToUse8c: 'Setelah import, hasil akan langsung ditampilkan dan Anda dapat melakukan perubahan',
+                howToUse9: 'Klik tombol "Reset Semua" untuk menghapus semua data dan memulai dari awal',
                 loading: 'Sedang membagi kelompok...',
                 resultsTitle: 'Hasil Pembagian Kelompok',
                 copyResults: 'Salin Hasil',
@@ -1542,6 +1549,9 @@
                 persons: 'orang',
                 groupDefault: 'Kelompok {num}',
                 noName: 'Tanpa Nama',
+                untitled: 'Untitled',
+                groupSummary: 'Ringkasan:',
+                overallSummary: 'RINGKASAN KESELURUHAN',
                 saveImageSubtitle: 'Splitter - Pembagian Kelompok Dengan Cara Yang Berbeda'
             },
             en: {
@@ -1571,26 +1581,28 @@
                 totalGroups: 'Number of Groups',
                 avgPerGroup: 'Average/Group',
                 howToUse: 'How to Use:',
-                howToUse1: 'Title (Optional): Enter a title for your group data. If not filled, will use "Untitled" automatically.',
-                howToUse2: 'Enter the desired number of groups',
-                howToUse3: 'Add participants using the "Add Participant" button or press Enter after typing the name. Or use the "Add Participants in Bulk" feature to add many participants at once (one name per line)',
+                howToUse1: 'Enter a data title (optional) to identify your group division',
+                howToUse2: 'Specify the number of groups you want to create',
+                howToUse3: 'Add participants in two ways:',
+                howToUse3a: 'Use the "Add Participant" button or press Enter after typing the name',
+                howToUse3b: 'Use the "Add Participants in Bulk" feature to add many participants at once (one name per line)',
                 howToUse4: 'Select gender for each participant (Male/Female) - optional',
-                howToUse5: 'Gender Settings (optional):',
-                howToUse5a: 'Separate groups by gender (Male and Female separate)',
-                howToUse5b: 'Enable minimum Male/Female per group for balanced distribution',
-                howToUse6: 'Click "Create Groups" to divide automatically and randomly',
-                howToUse7: 'After results appear:',
-                howToUse7a: 'Edit Group Name: Click on the group name input field in each group card to change the group name as desired',
-                howToUse7b: 'Click "Update Groups" (button will automatically change from "Create Groups") to update existing groups with participant changes',
+                howToUse5: 'Configure gender settings (optional):',
+                howToUse5a: 'Enable gender separation to separate Male and Female',
+                howToUse5b: 'Set minimum Male/Female per group for balanced distribution',
+                howToUse6: 'Click the "Create Groups" button to start automatic random division',
+                howToUse7: 'After results appear, you can:',
+                howToUse7a: 'Edit group name by clicking the name field in each group card',
+                howToUse7b: 'Click "Update Groups" to save changes to names or participants',
                 howToUse7c: 'Click "Copy Results" to copy results to clipboard',
                 howToUse7d: 'Click "Regenerate" to create a new random division',
-                howToUse7e: 'Click "Save as Image" to save results as PNG image (for display/print)',
+                howToUse7e: 'Click "Save as Image" to save results as PNG file',
                 howToUse7f: 'Click "Save as TXT" to save results as text file that can be imported again',
-                howToUse8: 'Import Data:',
-                howToUse8a: 'Use the "Import Group Data (TXT)" button to load data from a previously saved TXT file',
-                howToUse8b: 'The imported TXT file will contain: data title, group names, and all participants with gender',
-                howToUse8c: 'After import, you can immediately view results or make changes',
-                howToUse9: 'Click "Reset All" to delete all data (participants, groups, and settings) and start from scratch',
+                howToUse8: 'To load previously saved data:',
+                howToUse8a: 'Click the "Import Group Data (TXT)" button and select a previously saved TXT file',
+                howToUse8b: 'The TXT file contains: data title, group names, and all participants with gender',
+                howToUse8c: 'After import, results will be displayed immediately and you can make changes',
+                howToUse9: 'Click the "Reset All" button to delete all data and start from scratch',
                 loading: 'Dividing groups...',
                 resultsTitle: 'Group Division Results',
                 copyResults: 'Copy Results',
@@ -1640,6 +1652,9 @@
                 persons: 'person',
                 groupDefault: 'Group {num}',
                 noName: 'No Name',
+                untitled: 'Untitled',
+                groupSummary: 'Summary:',
+                overallSummary: 'OVERALL SUMMARY',
                 saveImageSubtitle: 'Splitter - Team Division In Different Ways'
             }
         };
@@ -1778,37 +1793,56 @@
             // Update all how to use items
             const howToUseList = document.getElementById('howToUseList');
             if (howToUseList) {
-                const items = howToUseList.querySelectorAll('li');
+                const items = howToUseList.querySelectorAll(':scope > li');
                 
                 // Item 1
                 if (items[0]) {
-                    const text = t('howToUse1');
-                    const parts = text.split(':');
-                    if (parts.length > 1) {
-                        items[0].innerHTML = '<strong id="howToUseItem1">' + parts[0] + ':</strong> ' + parts.slice(1).join(':');
+                    let text1 = t('howToUse1');
+                    // Add strong tag for "judul data" / "data title"
+                    if (currentLanguage === 'id') {
+                        text1 = text1.replace('judul data', '<strong>judul data</strong>');
                     } else {
-                        items[0].innerHTML = text;
+                        text1 = text1.replace('data title', '<strong>data title</strong>');
                     }
+                    items[0].innerHTML = text1;
                 }
                 
                 // Item 2
                 if (items[1]) {
-                    items[1].innerHTML = '<strong id="howToUseItem2">' + t('howToUse2') + '</strong>';
+                    let text2 = t('howToUse2');
+                    // Add strong tag for "jumlah kelompok" / "number of groups"
+                    if (currentLanguage === 'id') {
+                        text2 = text2.replace('jumlah kelompok', '<strong>jumlah kelompok</strong>');
+                    } else {
+                        text2 = text2.replace('number of groups', '<strong>number of groups</strong>');
+                    }
+                    items[1].innerHTML = text2;
                 }
                 
-                // Item 3
+                // Item 3 (with sub-items)
                 if (items[2]) {
-                    items[2].innerHTML = t('howToUse3');
-                    // Ensure the ID is preserved on the strong tag if it exists
-                    const strongTag = items[2].querySelector('strong');
-                    if (strongTag && !strongTag.id) {
-                        strongTag.id = 'howToUseItem3';
+                    let text3a = t('howToUse3a');
+                    let text3b = t('howToUse3b');
+                    if (currentLanguage === 'id') {
+                        text3a = text3a.replace('"Tambah Peserta"', '"' + t('addParticipant') + '"');
+                        text3b = text3b.replace('"Tambah Peserta Secara Bulk"', '"' + t('bulkAddParticipant') + '"');
+                    } else {
+                        text3a = text3a.replace(/Add Participant/g, t('addParticipant'));
+                        text3b = text3b.replace(/Add Participants in Bulk/g, t('bulkAddParticipant'));
                     }
+                    items[2].innerHTML = '<strong id="howToUseItem3">' + t('howToUse3') + '</strong><ul style="margin-top: 5px; padding-left: 20px; line-height: 1.6;"><li id="howToUseItem3a">' + text3a + '</li><li id="howToUseItem3b">' + text3b + '</li></ul>';
                 }
                 
                 // Item 4
                 if (items[3]) {
-                    items[3].innerHTML = t('howToUse4');
+                    let text4 = t('howToUse4');
+                    // Add strong tag for "jenis kelamin" / "gender"
+                    if (currentLanguage === 'id') {
+                        text4 = text4.replace('jenis kelamin', '<strong>jenis kelamin</strong>');
+                    } else {
+                        text4 = text4.replace('gender', '<strong>gender</strong>');
+                    }
+                    items[3].innerHTML = text4;
                 }
             
                 // Item 5 (with sub-items)
@@ -1820,36 +1854,49 @@
                 if (items[5]) {
                     let text6 = t('howToUse6');
                     if (currentLanguage === 'id') {
-                        text6 = text6.replace('"Buat Kelompok"', '"' + t('generateGroups') + '"');
+                        text6 = text6.replace('"Buat Kelompok"', '<strong>"' + t('generateGroups') + '"</strong>');
                     } else {
-                        text6 = text6.replace(/Create Groups/g, t('generateGroups'));
+                        text6 = text6.replace(/"Create Groups"/g, '<strong>"' + t('generateGroups') + '"</strong>');
                     }
                     items[5].innerHTML = text6;
                 }
                 
                 // Item 7 (with sub-items)
                 if (items[6]) {
-                    const text7a = t('howToUse7a');
-                    const parts7a = text7a.split(':');
-                    const formatted7a = parts7a.length > 1 ? '<strong>' + parts7a[0] + ':</strong> ' + parts7a.slice(1).join(':') : text7a;
-                    
+                    let text7a = t('howToUse7a');
                     let text7b = t('howToUse7b');
+                    let text7c = t('howToUse7c');
+                    let text7d = t('howToUse7d');
+                    let text7e = t('howToUse7e');
+                    let text7f = t('howToUse7f');
+                    
+                    // Format text7a with strong tag
                     if (currentLanguage === 'id') {
-                        text7b = text7b.replace('"Update Kelompok"', '"' + t('updateGroups') + '"').replace('"Buat Kelompok"', '"' + t('generateGroups') + '"');
+                        text7a = text7a.replace('Edit nama kelompok', '<strong>Edit nama kelompok</strong>');
+                        text7b = text7b.replace('"Update Kelompok"', '<strong>"' + t('updateGroups') + '"</strong>');
+                        text7c = text7c.replace('"Salin Hasil"', '<strong>"' + t('copyResults') + '"</strong>');
+                        text7d = text7d.replace('"Acak Ulang"', '<strong>"' + t('regenerateGroups') + '"</strong>');
+                        text7e = text7e.replace('"Simpan sebagai Gambar"', '<strong>"' + t('saveAsImage') + '"</strong>');
+                        text7f = text7f.replace('"Simpan sebagai TXT"', '<strong>"' + t('saveAsTxt') + '"</strong>');
                     } else {
-                        text7b = text7b.replace(/Update Groups/g, t('updateGroups')).replace(/Create Groups/g, t('generateGroups'));
+                        text7a = text7a.replace('Edit group name', '<strong>Edit group name</strong>');
+                        text7b = text7b.replace(/"Update Groups"/g, '<strong>"' + t('updateGroups') + '"</strong>');
+                        text7c = text7c.replace(/"Copy Results"/g, '<strong>"' + t('copyResults') + '"</strong>');
+                        text7d = text7d.replace(/"Regenerate"/g, '<strong>"' + t('regenerateGroups') + '"</strong>');
+                        text7e = text7e.replace(/"Save as Image"/g, '<strong>"' + t('saveAsImage') + '"</strong>');
+                        text7f = text7f.replace(/"Save as TXT"/g, '<strong>"' + t('saveAsTxt') + '"</strong>');
                     }
                     
-                    items[6].innerHTML = '<strong id="howToUseItem7">' + t('howToUse7') + '</strong><ul style="margin-top: 5px; padding-left: 20px; line-height: 1.6;"><li id="howToUseItem7a">' + formatted7a + '</li><li id="howToUseItem7b">' + text7b + '</li><li id="howToUseItem7c">' + t('howToUse7c') + '</li><li id="howToUseItem7d">' + t('howToUse7d') + '</li><li id="howToUseItem7e">' + t('howToUse7e') + '</li><li id="howToUseItem7f">' + t('howToUse7f') + '</li></ul>';
+                    items[6].innerHTML = '<strong id="howToUseItem7">' + t('howToUse7') + '</strong><ul style="margin-top: 5px; padding-left: 20px; line-height: 1.6;"><li id="howToUseItem7a">' + text7a + '</li><li id="howToUseItem7b">' + text7b + '</li><li id="howToUseItem7c">' + text7c + '</li><li id="howToUseItem7d">' + text7d + '</li><li id="howToUseItem7e">' + text7e + '</li><li id="howToUseItem7f">' + text7f + '</li></ul>';
                 }
             
                 // Item 8 (with sub-items)
                 if (items[7]) {
                     let text8a = t('howToUse8a');
                     if (currentLanguage === 'id') {
-                        text8a = text8a.replace('"Import Data Kelompok (TXT)"', '"' + t('importData') + '"');
+                        text8a = text8a.replace('"Import Data Kelompok (TXT)"', '<strong>"' + t('importData') + '"</strong>');
                     } else {
-                        text8a = text8a.replace(/Import Group Data \(TXT\)/g, t('importData'));
+                        text8a = text8a.replace(/"Import Group Data \(TXT\)"/g, '<strong>"' + t('importData') + '"</strong>');
                     }
                     items[7].innerHTML = '<strong id="howToUseItem8">' + t('howToUse8') + '</strong><ul style="margin-top: 5px; padding-left: 20px; line-height: 1.6;"><li id="howToUseItem8a">' + text8a + '</li><li id="howToUseItem8b">' + t('howToUse8b') + '</li><li id="howToUseItem8c">' + t('howToUse8c') + '</li></ul>';
                 }
@@ -1858,9 +1905,9 @@
                 if (items[8]) {
                     let text9 = t('howToUse9');
                     if (currentLanguage === 'id') {
-                        text9 = text9.replace('"Reset Semua"', '"' + t('resetAll') + '"');
+                        text9 = text9.replace('"Reset Semua"', '<strong>"' + t('resetAll') + '"</strong>');
                     } else {
-                        text9 = text9.replace(/Reset All/g, t('resetAll'));
+                        text9 = text9.replace(/"Reset All"/g, '<strong>"' + t('resetAll') + '"</strong>');
                     }
                     items[8].innerHTML = text9;
                 }
@@ -3173,7 +3220,7 @@
                 
                 // Get current title
                 dataTitle = document.getElementById('dataTitle').value.trim();
-                const displayTitle = dataTitle || 'Untitled';
+                const displayTitle = dataTitle || t('untitled');
                 
                 // Header title (keep original case)
                 ctx.fillStyle = '#ffffff';
@@ -3285,7 +3332,7 @@
                         // Participant name
                         ctx.fillStyle = '#2c3e50';
                         ctx.font = '16px Arial';
-                        const name = participant.name || 'Tanpa Nama';
+                        const name = participant.name || t('noName');
                         
                         // Calculate available width for name (considering gender badge if exists)
                         const nameStartX = x + cardPadding + 25;
@@ -3338,7 +3385,7 @@
                         ctx.fillStyle = '#7f8c8d';
                         ctx.font = '13px Arial';
                         const statsY = participantY + groupStatsHeight / 2;
-                        ctx.fillText(`👨 ${maleCount} Putra | 👩 ${femaleCount} Putri`, x + cardPadding, statsY);
+                        ctx.fillText(`👨 ${maleCount} ${t('male')} | 👩 ${femaleCount} ${t('female')}`, x + cardPadding, statsY);
                     }
                 });
                 
@@ -3350,7 +3397,7 @@
                 ctx.font = 'bold 22px Arial';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
-                ctx.fillText('RINGKASAN KESELURUHAN', canvas.width / 2, footerY + footerPadding);
+                ctx.fillText(t('overallSummary'), canvas.width / 2, footerY + footerPadding);
                 
                 ctx.font = '16px Arial';
                 const summaryY = footerY + footerPadding + 35;
@@ -3399,7 +3446,7 @@
             try {
                 // Get current title
                 dataTitle = document.getElementById('dataTitle').value.trim();
-                const displayTitle = dataTitle || 'Untitled';
+                const displayTitle = dataTitle || t('untitled');
                 
                 let textContent = '';
                 const lineBreak = '\r\n';
@@ -3418,8 +3465,8 @@
                     
                     // Add participants
                     group.members.forEach((participant, index) => {
-                        const name = participant.name || 'Tanpa Nama';
-                        const gender = participant.gender ? ` (${participant.gender})` : '';
+                        const name = participant.name || t('noName');
+                        const gender = participant.gender ? ` (${participant.gender === 'putra' ? t('male') : t('female')})` : '';
                         textContent += `${index + 1}. ${name}${gender}` + lineBreak;
                     });
                     
@@ -3428,7 +3475,7 @@
                     const femaleCount = group.members.filter(p => p.gender === 'putri').length;
                     
                     textContent += lineBreak;
-                    textContent += 'Ringkasan:' + lineBreak;
+                    textContent += t('groupSummary') + lineBreak;
                     textContent += `- Total: ${group.members.length} ${t('people')}` + lineBreak;
                     textContent += `- ${t('male')}: ${maleCount} ${t('people')}` + lineBreak;
                     textContent += `- ${t('female')}: ${femaleCount} ${t('people')}` + lineBreak;
@@ -3446,7 +3493,7 @@
                 );
                 const avgPerGroup = groups.length > 0 ? (totalParticipants / groups.length).toFixed(2) : 0;
                 
-                const summaryTitle = 'RINGKASAN KESELURUHAN';
+                const summaryTitle = t('overallSummary');
                 textContent += summaryTitle + lineBreak;
                 textContent += '='.repeat(summaryTitle.length) + lineBreak;
                 textContent += `${t('totalParticipants')}: ${totalParticipants} ${t('people')}` + lineBreak;
@@ -3720,8 +3767,9 @@
                         }
                     }
                     
-                    // Check for summary section (stops reading table data)
-                    if (trimmedLine.includes('RINGKASAN:') || trimmedLine.includes('RINGKASAN KESELURUHAN')) {
+                    // Check for summary section (stops reading table data) - support both languages
+                    const summaryKeywords = ['RINGKASAN:', 'RINGKASAN KESELURUHAN', 'SUMMARY:', 'OVERALL SUMMARY'];
+                    if (summaryKeywords.some(keyword => trimmedLine.includes(keyword))) {
                         inTable = false;
                         continue;
                     }
@@ -3736,7 +3784,9 @@
                 // Check if this could be a new group header
                 // It should not be a participant line, summary line, or separator
                 const isParticipantLine = trimmedLine.match(/^\d+\.\s+/);
-                const isSummaryLine = trimmedLine.toLowerCase().includes('ringkasan') || trimmedLine.startsWith('-');
+                const isSummaryLine = trimmedLine.toLowerCase().includes('ringkasan') || 
+                                     trimmedLine.toLowerCase().includes('summary') || 
+                                     trimmedLine.startsWith('-');
                 const isSeparator = trimmedLine.match(/^=+$/);
                 
                 // If we're in summary section and find a potential group header, reset summary section
@@ -3764,6 +3814,7 @@
                                            !trimmedLine.startsWith('-') && 
                                            !isSeparator &&
                                            !trimmedLine.toLowerCase().includes('ringkasan') &&
+                                           !trimmedLine.toLowerCase().includes('summary') &&
                                            trimmedLine.length > 0 &&
                                            !currentGroup;
                     
@@ -3788,8 +3839,8 @@
                     continue;
                 }
                 
-                // Check for overall summary section - stop processing
-                if (trimmedLine.toUpperCase() === 'RINGKASAN KESELURUHAN') {
+                // Check for overall summary section - stop processing (support both languages)
+                if (trimmedLine.toUpperCase() === 'RINGKASAN KESELURUHAN' || trimmedLine.toUpperCase() === 'OVERALL SUMMARY') {
                     // Save last group before overall summary
                     if (currentGroup && currentGroup.members && currentGroup.members.length > 0) {
                         groups.push(currentGroup);
@@ -3798,9 +3849,10 @@
                     break;
                 }
                 
-                // Check if we're in summary section - stop reading participants for current group
-                if (trimmedLine.toLowerCase() === 'ringkasan:' || 
-                    (trimmedLine.toLowerCase().includes('ringkasan') && !trimmedLine.toLowerCase().includes('keseluruhan'))) {
+                // Check if we're in summary section - stop reading participants for current group (support both languages)
+                if (trimmedLine.toLowerCase() === 'ringkasan:' || trimmedLine.toLowerCase() === 'summary:' ||
+                    (trimmedLine.toLowerCase().includes('ringkasan') && !trimmedLine.toLowerCase().includes('keseluruhan')) ||
+                    (trimmedLine.toLowerCase().includes('summary') && !trimmedLine.toLowerCase().includes('overall'))) {
                     inSummarySection = true;
                     continue;
                 }
@@ -3816,7 +3868,8 @@
                     // Check if this looks like a group header
                     const looksLikeGroupHeader = !trimmedLine.match(/^\d+\./) && 
                                                  !trimmedLine.match(/^=+$/) &&
-                                                 !trimmedLine.toLowerCase().includes('ringkasan');
+                                                 !trimmedLine.toLowerCase().includes('ringkasan') &&
+                                                 !trimmedLine.toLowerCase().includes('summary');
                     
                     if (looksLikeGroupHeader) {
                         // Save previous group
