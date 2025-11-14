@@ -1,10 +1,10 @@
-# TeamPick - Aplikasi Pembagian Kelompok
+# Splitter - Aplikasi Pembagian Kelompok
 
 Aplikasi web untuk membagi peserta ke dalam kelompok secara otomatis dan acak dengan berbagai opsi pengaturan gender dan distribusi yang seimbang.
 
 ## 📋 Deskripsi
 
-TeamPick (Splitter) adalah aplikasi web berbasis HTML, CSS, dan JavaScript yang memungkinkan Anda untuk:
+Splitter adalah aplikasi web berbasis HTML, CSS, dan JavaScript yang memungkinkan Anda untuk:
 - Membagi peserta ke dalam beberapa kelompok secara otomatis
 - Mengatur distribusi berdasarkan gender (Putra/Putri)
 - Memberikan nama custom untuk setiap kelompok
