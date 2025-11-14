@@ -390,6 +390,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
             margin-bottom: 12px;
             padding-bottom: 10px;
             border-bottom: 1px solid #ddd;
@@ -399,6 +400,25 @@
             font-size: 1.2rem;
             font-weight: bold;
             color: #2c3e50;
+        }
+        
+        .group-name-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            background: white;
+            color: #2c3e50;
+            transition: all 0.2s ease;
+        }
+        
+        .group-name-input:focus {
+            outline: none;
+            border-color: #5a6c7d;
+            background: #fafbfc;
+            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.08);
         }
 
         .group-stats {
@@ -1037,6 +1057,12 @@
                 <h2 class="card-title">Data Peserta</h2>
                 
                 <div class="form-group">
+                    <label class="form-label">Judul (Opsional)</label>
+                    <input type="text" id="dataTitle" class="form-input" value="" placeholder="Masukkan judul data (contoh: Kelompok MTK)">
+                    <small style="color: #666; font-size: 0.85rem; display: block; margin-top: 4px;">Jika tidak diisi, akan menggunakan "Untitled"</small>
+                </div>
+                
+                <div class="form-group">
                     <label class="form-label">Jumlah Kelompok</label>
                     <input type="number" id="numGroups" class="form-input" min="1" value="2" placeholder="Masukkan jumlah kelompok">
                 </div>
@@ -1109,6 +1135,7 @@
                 <div class="form-group">
                     <h3 style="margin-bottom: 12px; color: #333; font-size: 1.1rem;">Cara Penggunaan:</h3>
                     <ol style="padding-left: 20px; line-height: 1.8; color: #666; font-size: 0.9rem;">
+                        <li><strong>Judul Data (Opsional)</strong>: Masukkan judul untuk data kelompok Anda. Jika tidak diisi, akan menggunakan "Untitled" secara otomatis.</li>
                         <li><strong>Masukkan jumlah kelompok</strong> yang diinginkan</li>
                         <li><strong>Tambahkan peserta</strong> dengan tombol "Tambah Peserta" atau tekan <strong>Enter</strong> setelah mengetik nama</li>
                         <li><strong>Pilih jenis kelamin</strong> untuk setiap peserta (Putra/Putri) - opsional</li>
@@ -1121,13 +1148,22 @@
                         <li>Klik <strong>"Buat Kelompok"</strong> untuk membagi secara otomatis dan acak</li>
                         <li><strong>Setelah hasil muncul</strong>:
                             <ul style="margin-top: 5px; padding-left: 20px; line-height: 1.6;">
-                                <li>Klik "Salin Hasil" untuk menyalin ke clipboard</li>
-                                <li>Klik "Acak Ulang" untuk membuat pembagian baru</li>
-                                <li>Klik "Simpan Kelompok (TXT)" untuk menyimpan ke file</li>
+                                <li><strong>Edit Nama Kelompok</strong>: Klik pada input field nama kelompok di setiap kartu kelompok untuk mengubah nama kelompok sesuai keinginan</li>
+                                <li>Klik <strong>"Update Kelompok"</strong> (tombol akan berubah otomatis dari "Buat Kelompok") untuk memperbarui kelompok yang sudah ada dengan perubahan peserta</li>
+                                <li>Klik <strong>"Salin Hasil"</strong> untuk menyalin hasil ke clipboard</li>
+                                <li>Klik <strong>"Acak Ulang"</strong> untuk membuat pembagian baru secara acak</li>
+                                <li>Klik <strong>"Simpan sebagai Gambar"</strong> untuk menyimpan hasil sebagai gambar PNG (untuk tampilan/print)</li>
+                                <li>Klik <strong>"Simpan sebagai TXT"</strong> untuk menyimpan hasil sebagai file teks yang bisa diimport kembali</li>
                             </ul>
                         </li>
-                        <li><strong>Import Data</strong>: Gunakan tombol "Import Data Kelompok (TXT)" untuk memuat data dari file TXT</li>
-                        <li>Klik <strong>"Reset Semua"</strong> untuk menghapus semua data dan memulai dari awal</li>
+                        <li><strong>Import Data</strong>: 
+                            <ul style="margin-top: 5px; padding-left: 20px; line-height: 1.6;">
+                                <li>Gunakan tombol <strong>"Import Data Kelompok (TXT)"</strong> untuk memuat data dari file TXT yang sebelumnya disimpan</li>
+                                <li>File TXT yang diimport akan memuat: judul data, nama kelompok, dan semua peserta dengan gender</li>
+                                <li>Setelah import, Anda bisa langsung melihat hasil atau melakukan perubahan</li>
+                            </ul>
+                        </li>
+                        <li>Klik <strong>"Reset Semua"</strong> untuk menghapus semua data (peserta, kelompok, dan pengaturan) dan memulai dari awal</li>
                     </ol>
                 </div>
             </div>
@@ -1142,7 +1178,7 @@
         <!-- Results Section -->
         <div class="results-section" id="resultsSection">
             <div class="card">
-                <h2 class="card-title">Hasil Pembagian Kelompok</h2>
+                <h2 class="card-title" id="resultsTitle">Hasil Pembagian Kelompok</h2>
                 
                 <div class="stats-summary" id="resultStats">
                     <!-- Stats will be added here -->
@@ -1155,8 +1191,11 @@
                     <button class="btn btn-secondary" id="regenerateGroups">
                         Acak Ulang
                     </button>
-                    <button class="btn btn-success" id="saveGroups">
-                        Simpan Kelompok (TXT)
+                    <button class="btn btn-success" id="saveGroupsImage">
+                        Simpan sebagai Gambar
+                    </button>
+                    <button class="btn btn-success" id="saveGroupsTxt">
+                        Simpan sebagai TXT
                     </button>
                 </div>
 
@@ -1191,7 +1230,11 @@
     <script>
         // State management
         let participants = [];
-        let groups = [];
+        let groups = []; // Array of { name: string, members: array }
+        let hasImportedData = false; // Track if data was imported
+        let lastGeneratedParticipants = []; // Snapshot of participants when groups were last generated
+        let isUpdateMode = false; // Track if we're in update mode
+        let dataTitle = ''; // Default title (empty, will use "Untitled" if not filled)
 
         // Custom Confirm Dialog
         function showConfirm(message, title = 'Konfirmasi', icon = '⚠️') {
@@ -1290,6 +1333,17 @@
             document.getElementById('addParticipant').addEventListener('click', addParticipant);
             document.getElementById('generateGroups').addEventListener('click', generateGroups);
             document.getElementById('resetAll').addEventListener('click', resetAll);
+            
+            // Update data title when user changes it
+            document.getElementById('dataTitle').addEventListener('input', function() {
+                dataTitle = this.value.trim();
+                // Update results title if results are already displayed
+                const resultsTitleEl = document.getElementById('resultsTitle');
+                if (resultsTitleEl && groups.length > 0) {
+                    resultsTitleEl.textContent = dataTitle || 'Untitled';
+                }
+            });
+            
             document.getElementById('enableGenderMin').addEventListener('change', function() {
                 const separateByGender = document.getElementById('separateByGender');
                 // If checking enableGenderMin, uncheck separateByGender
@@ -1309,8 +1363,13 @@
             });
             document.getElementById('numGroups').addEventListener('input', updateInfo);
             document.getElementById('copyResults').addEventListener('click', copyResults);
-            document.getElementById('regenerateGroups').addEventListener('click', generateGroups);
-            document.getElementById('saveGroups').addEventListener('click', saveGroups);
+            document.getElementById('regenerateGroups').addEventListener('click', function() {
+                // Force create new groups (not update) when clicking "Acak Ulang"
+                isUpdateMode = false;
+                generateGroups();
+            });
+            document.getElementById('saveGroupsImage').addEventListener('click', saveGroupsImage);
+            document.getElementById('saveGroupsTxt').addEventListener('click', saveGroupsTxt);
         });
 
         // Add participant
@@ -1417,7 +1476,7 @@
         function removeParticipant(index) {
             participants.splice(index, 1);
             renderParticipants();
-            updateInfo();
+            updateInfo(); // This will also update button text
         }
 
         // Clear gender for a participant
@@ -1532,6 +1591,39 @@
             inputs.classList.toggle('hidden', !checkbox.checked);
         }
 
+        // Check if participants have changed since last generation
+        function hasParticipantsChanged() {
+            if (!hasImportedData || groups.length === 0) {
+                return false;
+            }
+            
+            const currentValid = participants.filter(p => p.name.trim() !== '')
+                .map(p => ({ name: p.name.trim(), gender: p.gender || '' }))
+                .sort((a, b) => a.name.localeCompare(b.name));
+            
+            const lastValid = lastGeneratedParticipants
+                .map(p => ({ name: p.name.trim(), gender: p.gender || '' }))
+                .sort((a, b) => a.name.localeCompare(b.name));
+            
+            // Compare by converting to JSON strings
+            return JSON.stringify(currentValid) !== JSON.stringify(lastValid);
+        }
+
+        // Update button text based on state
+        function updateGenerateButton() {
+            const btn = document.getElementById('generateGroups');
+            if (!btn) return;
+            
+            // If groups are already displayed, change button to "Update Kelompok"
+            if (groups.length > 0) {
+                btn.textContent = 'Update Kelompok';
+                isUpdateMode = true;
+            } else {
+                btn.textContent = 'Buat Kelompok';
+                isUpdateMode = false;
+            }
+        }
+
         // Update info stats
         function updateInfo() {
             const validParticipants = participants.filter(p => p.name.trim() !== '');
@@ -1543,6 +1635,9 @@
             document.getElementById('totalParticipants').textContent = validParticipants.length;
             document.getElementById('totalGroups').textContent = numGroups;
             document.getElementById('avgPerGroup').textContent = avgPerGroup;
+            
+            // Update button text
+            updateGenerateButton();
         }
 
         // Remove oldest notification with slide out animation
@@ -1608,6 +1703,212 @@
             }, 5000);
         }
 
+        // Update groups (only add new participants and remove deleted ones)
+        function updateGroups(validParticipants, numGroups, minMale, minFemale, enableGenderMin, separateByGender) {
+            // Find participants that were added (in current but not in last)
+            const currentParticipantsMap = new Map();
+            validParticipants.forEach(p => {
+                const key = `${p.name.trim()}_${p.gender || ''}`;
+                currentParticipantsMap.set(key, p);
+            });
+            
+            const lastParticipantsMap = new Map();
+            lastGeneratedParticipants.forEach(p => {
+                const key = `${p.name.trim()}_${p.gender || ''}`;
+                lastParticipantsMap.set(key, p);
+            });
+            
+            // Find new participants
+            const newParticipants = [];
+            currentParticipantsMap.forEach((p, key) => {
+                if (!lastParticipantsMap.has(key)) {
+                    newParticipants.push(p);
+                }
+            });
+            
+            // Find deleted participants
+            const deletedParticipants = [];
+            lastParticipantsMap.forEach((p, key) => {
+                if (!currentParticipantsMap.has(key)) {
+                    deletedParticipants.push(p);
+                }
+            });
+            
+            // Remove deleted participants from groups
+            deletedParticipants.forEach(deleted => {
+                groups.forEach(group => {
+                    const index = group.members.findIndex(p => 
+                        p.name.trim() === deleted.name.trim() && 
+                        (p.gender || '') === (deleted.gender || '')
+                    );
+                    if (index !== -1) {
+                        group.members.splice(index, 1);
+                    }
+                });
+            });
+            
+            // Remove empty groups if any
+            groups = groups.filter(group => group.members.length > 0);
+            
+            // If number of groups changed, we need to redistribute
+            if (groups.length !== numGroups) {
+                // If groups reduced, merge groups
+                if (groups.length > numGroups) {
+                    // Merge excess groups into existing ones
+                    while (groups.length > numGroups) {
+                        const lastGroup = groups.pop();
+                        lastGroup.members.forEach(p => {
+                            // Find group with least members
+                            const smallestGroupIndex = groups.reduce((minIdx, group, idx, arr) => 
+                                group.members.length < arr[minIdx].members.length ? idx : minIdx, 0
+                            );
+                            groups[smallestGroupIndex].members.push(p);
+                        });
+                    }
+                } else {
+                    // If groups increased, create new empty groups
+                    while (groups.length < numGroups) {
+                        groups.push({
+                            name: `Kelompok ${groups.length + 1}`,
+                            members: []
+                        });
+                    }
+                }
+            }
+            
+            // Add new participants to groups
+            if (newParticipants.length > 0) {
+                // Shuffle new participants
+                const shuffledNew = [...newParticipants].sort(() => Math.random() - 0.5);
+                
+                if (separateByGender) {
+                    // Separate new participants by gender
+                    const newMales = shuffledNew.filter(p => p.gender === 'putra');
+                    const newFemales = shuffledNew.filter(p => p.gender === 'putri');
+                    const newOthers = shuffledNew.filter(p => p.gender === '' || (p.gender !== 'putra' && p.gender !== 'putri'));
+                    
+                    // Find male and female groups
+                    const maleGroups = [];
+                    const femaleGroups = [];
+                    const otherGroups = [];
+                    
+                    groups.forEach((group, index) => {
+                        const hasMale = group.members.some(p => p.gender === 'putra');
+                        const hasFemale = group.members.some(p => p.gender === 'putri');
+                        
+                        if (hasMale && !hasFemale) {
+                            maleGroups.push(index);
+                        } else if (hasFemale && !hasMale) {
+                            femaleGroups.push(index);
+                        } else {
+                            otherGroups.push(index);
+                        }
+                    });
+                    
+                    // Distribute new males to male groups
+                    newMales.forEach((p, index) => {
+                        if (maleGroups.length > 0) {
+                            const targetGroup = maleGroups[index % maleGroups.length];
+                            groups[targetGroup].members.push(p);
+                        } else if (groups.length > 0) {
+                            // If no male groups, add to smallest group
+                            const smallestGroupIndex = groups.reduce((minIdx, group, idx, arr) => 
+                                group.members.length < arr[minIdx].members.length ? idx : minIdx, 0
+                            );
+                            groups[smallestGroupIndex].members.push(p);
+                        }
+                    });
+                    
+                    // Distribute new females to female groups
+                    newFemales.forEach((p, index) => {
+                        if (femaleGroups.length > 0) {
+                            const targetGroup = femaleGroups[index % femaleGroups.length];
+                            groups[targetGroup].members.push(p);
+                        } else if (groups.length > 0) {
+                            // If no female groups, add to smallest group
+                            const smallestGroupIndex = groups.reduce((minIdx, group, idx, arr) => 
+                                group.members.length < arr[minIdx].members.length ? idx : minIdx, 0
+                            );
+                            groups[smallestGroupIndex].members.push(p);
+                        }
+                    });
+                    
+                    // Distribute others
+                    newOthers.forEach((p) => {
+                        if (groups.length > 0) {
+                            const smallestGroupIndex = groups.reduce((minIdx, group, idx, arr) => 
+                                group.members.length < arr[minIdx].members.length ? idx : minIdx, 0
+                            );
+                            groups[smallestGroupIndex].members.push(p);
+                        }
+                    });
+                } else if (enableGenderMin && (minMale > 0 || minFemale > 0)) {
+                    // Distribute with gender minimum requirements
+                    const newMales = shuffledNew.filter(p => p.gender === 'putra');
+                    const newFemales = shuffledNew.filter(p => p.gender === 'putri');
+                    const newOthers = shuffledNew.filter(p => p.gender === '' || (p.gender !== 'putra' && p.gender !== 'putri'));
+                    
+                    // First, ensure minimum requirements are met for groups that need them
+                    newMales.forEach((p) => {
+                        // Find group that needs more males to meet minimum (if any) or has least males
+                        let groupIndex = groups.reduce((minIdx, group, idx, arr) => {
+                            const currentMales = arr[minIdx].members.filter(p => p.gender === 'putra').length;
+                            const compareMales = group.members.filter(p => p.gender === 'putra').length;
+                            // Prioritize groups that haven't met minimum yet
+                            if (compareMales < minMale && currentMales >= minMale) return idx;
+                            if (currentMales < minMale && compareMales >= minMale) return minIdx;
+                            return compareMales < currentMales ? idx : minIdx;
+                        }, 0);
+                        groups[groupIndex].members.push(p);
+                    });
+                    
+                    newFemales.forEach((p) => {
+                        // Find group that needs more females to meet minimum (if any) or has least females
+                        let groupIndex = groups.reduce((minIdx, group, idx, arr) => {
+                            const currentFemales = arr[minIdx].members.filter(p => p.gender === 'putri').length;
+                            const compareFemales = group.members.filter(p => p.gender === 'putri').length;
+                            // Prioritize groups that haven't met minimum yet
+                            if (compareFemales < minFemale && currentFemales >= minFemale) return idx;
+                            if (currentFemales < minFemale && compareFemales >= minFemale) return minIdx;
+                            return compareFemales < currentFemales ? idx : minIdx;
+                        }, 0);
+                        groups[groupIndex].members.push(p);
+                    });
+                    
+                    // Distribute others and any remaining participants prioritizing group balance
+                    // Combine remaining participants for balanced distribution
+                    const remainingParticipants = [...newOthers];
+                    
+                    // After minimum requirements are met, redistribute any excess to balance groups
+                    // Check if there are groups that need balancing
+                    const allRemaining = [...remainingParticipants];
+                    allRemaining.forEach((p) => {
+                        // Find group with least total members to maintain balance
+                        const smallestGroupIndex = groups.reduce((minIdx, group, idx, arr) => 
+                            group.members.length < arr[minIdx].members.length ? idx : minIdx, 0
+                        );
+                        groups[smallestGroupIndex].members.push(p);
+                    });
+                } else {
+                    // Simple round-robin distribution for new participants
+                    shuffledNew.forEach((p, index) => {
+                        // Find group with least members
+                        const smallestGroupIndex = groups.reduce((minIdx, group, idx, arr) => 
+                            group.members.length < arr[minIdx].members.length ? idx : minIdx, 0
+                        );
+                        groups[smallestGroupIndex].members.push(p);
+                    });
+                }
+            }
+            
+            // Shuffle each group to randomize order
+            groups.forEach(group => {
+                group.members.sort(() => Math.random() - 0.5);
+            });
+            
+            return groups;
+        }
+
         // Generate groups
         function generateGroups() {
             // Remove participants with empty names
@@ -1657,16 +1958,8 @@
             const maleCount = validParticipants.filter(p => p.gender === 'putra').length;
             const femaleCount = validParticipants.filter(p => p.gender === 'putri').length;
             
-            if (enableGenderMin) {
-                if (minMale * numGroups > maleCount) {
-                    showAlert(`Tidak cukup Putra! Minimal ${minMale} per kelompok × ${numGroups} kelompok = ${minMale * numGroups}, tetapi hanya ada ${maleCount} Putra.`, 'error');
-                    return;
-                }
-                if (minFemale * numGroups > femaleCount) {
-                    showAlert(`Tidak cukup Putri! Minimal ${minFemale} per kelompok × ${numGroups} kelompok = ${minFemale * numGroups}, tetapi hanya ada ${femaleCount} Putri.`, 'error');
-                    return;
-                }
-            }
+            // Note: We allow min gender even if not enough participants for all groups
+            // The distribution logic will handle it by distributing available participants evenly
 
             // Show loading
             document.getElementById('loading').classList.add('show');
@@ -1695,15 +1988,35 @@
             
             // Simulate processing (for animation)
             setTimeout(() => {
-                groups = divideIntoGroups(validParticipants, numGroups, minMale, minFemale, enableGenderMin, separateByGender);
+                // Check if we're in update mode and number of groups hasn't changed
+                const numGroupsChanged = groups.length !== numGroups;
+                
+                if (isUpdateMode && hasImportedData && groups.length > 0 && !numGroupsChanged) {
+                    // Update existing groups (only if number of groups hasn't changed)
+                    groups = updateGroups(validParticipants, numGroups, minMale, minFemale, enableGenderMin, separateByGender);
+                    showAlert('Kelompok berhasil diupdate!', 'success');
+                } else {
+                    // Create new groups (if number of groups changed or not in update mode)
+                    groups = divideIntoGroups(validParticipants, numGroups, minMale, minFemale, enableGenderMin, separateByGender);
+                    showAlert('Kelompok berhasil dibuat!', 'success');
+                }
+                
+                // Save snapshot of current participants
+                lastGeneratedParticipants = validParticipants.map(p => ({
+                    name: p.name.trim(),
+                    gender: p.gender || ''
+                }));
+                hasImportedData = true; // Mark that we have generated groups
+                
                 displayResults();
                 document.getElementById('loading').classList.remove('show');
                 document.getElementById('resultsSection').classList.add('show');
                 
+                // Update button text
+                updateGenerateButton();
+                
                 // Scroll to results
                 document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                showAlert('Kelompok berhasil dibuat!', 'success');
             }, 500);
         }
 
@@ -1712,13 +2025,21 @@
             // Shuffle participants randomly
             const shuffled = [...participants].sort(() => Math.random() - 0.5);
             
+            // Helper function to convert array of members to group objects
+            const convertToGroupObjects = (memberArrays) => {
+                return memberArrays.map((members, index) => ({
+                    name: `Kelompok ${index + 1}`,
+                    members: members
+                }));
+            };
+            
             // Separate by gender completely
             if (separateByGender) {
                 const males = shuffled.filter(p => p.gender === 'putra');
                 const females = shuffled.filter(p => p.gender === 'putri');
                 const others = shuffled.filter(p => p.gender === '' || (p.gender !== 'putra' && p.gender !== 'putri'));
                 
-                const groups = [];
+                const memberArrays = [];
                 
                 // Calculate how many groups for each gender
                 // If both genders exist, split groups evenly
@@ -1744,7 +2065,7 @@
                         const start = i * malesPerGroup;
                         const end = Math.min(start + malesPerGroup, males.length);
                         if (start < males.length) {
-                            groups.push(males.slice(start, end));
+                            memberArrays.push(males.slice(start, end));
                         }
                     }
                 }
@@ -1756,34 +2077,34 @@
                         const start = i * femalesPerGroup;
                         const end = Math.min(start + femalesPerGroup, females.length);
                         if (start < females.length) {
-                            groups.push(females.slice(start, end));
+                            memberArrays.push(females.slice(start, end));
                         }
                     }
                 }
                 
                 // Distribute others (participants without gender) to existing groups
                 others.forEach((p) => {
-                    if (groups.length === 0) {
-                        groups.push([p]);
+                    if (memberArrays.length === 0) {
+                        memberArrays.push([p]);
                     } else {
                         // Find group with least members
-                        const smallestGroupIndex = groups.reduce((minIdx, group, idx, arr) => 
+                        const smallestGroupIndex = memberArrays.reduce((minIdx, group, idx, arr) => 
                             group.length < arr[minIdx].length ? idx : minIdx, 0
                         );
-                        groups[smallestGroupIndex].push(p);
+                        memberArrays[smallestGroupIndex].push(p);
                     }
                 });
                 
                 // Shuffle each group
-                groups.forEach(group => {
+                memberArrays.forEach(group => {
                     group.sort(() => Math.random() - 0.5);
                 });
                 
-                return groups;
+                return convertToGroupObjects(memberArrays);
             }
             
-            // Initialize groups
-            const groups = Array.from({ length: numGroups }, () => []);
+            // Initialize groups as arrays of members
+            const memberArrays = Array.from({ length: numGroups }, () => []);
             
             // Separate by gender if needed
             if (enableGenderMin && (minMale > 0 || minFemale > 0)) {
@@ -1791,68 +2112,84 @@
                 const females = shuffled.filter(p => p.gender === 'putri');
                 const others = shuffled.filter(p => p.gender === '' || (p.gender !== 'putra' && p.gender !== 'putri'));
                 
-                // Distribute minimum requirements first
+                // Calculate how many groups can actually get the minimum requirement
+                // If not enough participants, distribute available ones evenly
+                const maxGroupsWithMinMale = minMale > 0 ? Math.floor(males.length / minMale) : numGroups;
+                const maxGroupsWithMinFemale = minFemale > 0 ? Math.floor(females.length / minFemale) : numGroups;
+                const groupsToFillWithMinMale = Math.min(numGroups, maxGroupsWithMinMale);
+                const groupsToFillWithMinFemale = Math.min(numGroups, maxGroupsWithMinFemale);
+                
                 let maleIndex = 0;
                 let femaleIndex = 0;
                 
-                for (let i = 0; i < numGroups; i++) {
-                    // Add minimum males
+                // First, distribute minimum males to groups that can get them
+                for (let i = 0; i < groupsToFillWithMinMale && maleIndex < males.length; i++) {
                     for (let j = 0; j < minMale && maleIndex < males.length; j++) {
-                        groups[i].push(males[maleIndex++]);
+                        memberArrays[i].push(males[maleIndex++]);
                     }
-                    // Add minimum females
+                }
+                
+                // Then, distribute minimum females to groups that can get them
+                for (let i = 0; i < groupsToFillWithMinFemale && femaleIndex < females.length; i++) {
                     for (let j = 0; j < minFemale && femaleIndex < females.length; j++) {
-                        groups[i].push(females[femaleIndex++]);
+                        memberArrays[i].push(females[femaleIndex++]);
                     }
                 }
                 
-                // Distribute remaining males
-                while (maleIndex < males.length) {
-                    const groupIndex = maleIndex % numGroups;
-                    groups[groupIndex].push(males[maleIndex++]);
-                }
+                // Combine remaining participants (males, females, and others) for balanced distribution
+                const remainingParticipants = [
+                    ...males.slice(maleIndex),
+                    ...females.slice(femaleIndex),
+                    ...others
+                ];
                 
-                // Distribute remaining females
-                while (femaleIndex < females.length) {
-                    const groupIndex = femaleIndex % numGroups;
-                    groups[femaleIndex % numGroups].push(females[femaleIndex++]);
-                }
+                // Shuffle remaining participants for randomness
+                remainingParticipants.sort(() => Math.random() - 0.5);
                 
-                // Distribute others (no gender specified)
-                others.forEach((p, index) => {
-                    // Find group with least members
-                    const groupIndex = groups.reduce((minIdx, group, idx, arr) => 
+                // Distribute remaining participants prioritizing group balance (total members)
+                remainingParticipants.forEach((p) => {
+                    // Find group with least total members to maintain balance
+                    const groupIndex = memberArrays.reduce((minIdx, group, idx, arr) => 
                         group.length < arr[minIdx].length ? idx : minIdx, 0
                     );
-                    groups[groupIndex].push(p);
+                    memberArrays[groupIndex].push(p);
                 });
             } else {
                 // Simple round-robin distribution
                 shuffled.forEach((participant, index) => {
-                    groups[index % numGroups].push(participant);
+                    memberArrays[index % numGroups].push(participant);
                 });
             }
             
             // Shuffle each group to randomize order
-            groups.forEach(group => {
+            memberArrays.forEach(group => {
                 group.sort(() => Math.random() - 0.5);
             });
             
-            return groups;
+            return convertToGroupObjects(memberArrays);
         }
 
         // Display results
         function displayResults() {
+            // Update title from input
+            dataTitle = document.getElementById('dataTitle').value.trim();
+            
+            // Update results title
+            const resultsTitleEl = document.getElementById('resultsTitle');
+            if (resultsTitleEl) {
+                resultsTitleEl.textContent = dataTitle || 'Untitled';
+            }
+            
             const container = document.getElementById('groupsContainer');
             container.innerHTML = '';
             
             // Calculate stats
-            const totalParticipants = groups.reduce((sum, group) => sum + group.length, 0);
+            const totalParticipants = groups.reduce((sum, group) => sum + group.members.length, 0);
             const totalMale = groups.reduce((sum, group) => 
-                sum + group.filter(p => p.gender === 'putra').length, 0
+                sum + group.members.filter(p => p.gender === 'putra').length, 0
             );
             const totalFemale = groups.reduce((sum, group) => 
-                sum + group.filter(p => p.gender === 'putri').length, 0
+                sum + group.members.filter(p => p.gender === 'putri').length, 0
             );
             
             // Display stats
@@ -1878,18 +2215,20 @@
             
             // Display groups
             groups.forEach((group, index) => {
-                const maleCount = group.filter(p => p.gender === 'putra').length;
-                const femaleCount = group.filter(p => p.gender === 'putri').length;
+                const maleCount = group.members.filter(p => p.gender === 'putra').length;
+                const femaleCount = group.members.filter(p => p.gender === 'putri').length;
                 
                 const groupCard = document.createElement('div');
                 groupCard.className = 'group-card';
                 groupCard.innerHTML = `
                     <div class="group-header">
-                        <div class="group-title">Kelompok ${index + 1}</div>
-                        <div class="group-stats">${group.length} orang</div>
+                        <input type="text" class="group-name-input" value="${group.name || `Kelompok ${index + 1}`}" 
+                               data-group-index="${index}" 
+                               placeholder="Nama Kelompok">
+                        <div class="group-stats">${group.members.length} orang</div>
                     </div>
                     <ul class="group-members">
-                        ${group.map((p) => `
+                        ${group.members.map((p) => `
                             <li>
                                 <span>${p.name || 'Tanpa Nama'}</span>
                                 ${p.gender ? `<span class="gender-badge">${p.gender === 'putra' ? '👨' : '👩'} ${p.gender}</span>` : ''}
@@ -1903,7 +2242,24 @@
                     ` : ''}
                 `;
                 container.appendChild(groupCard);
+                
+                // Add event listener for group name input
+                const nameInput = groupCard.querySelector('.group-name-input');
+                nameInput.addEventListener('blur', function() {
+                    const groupIndex = parseInt(this.getAttribute('data-group-index'));
+                    if (groupIndex >= 0 && groupIndex < groups.length) {
+                        groups[groupIndex].name = this.value.trim() || `Kelompok ${groupIndex + 1}`;
+                    }
+                });
+                nameInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        this.blur();
+                    }
+                });
             });
+            
+            // Update button text after displaying results
+            updateGenerateButton();
         }
 
         // Copy results
@@ -1913,13 +2269,17 @@
                 return;
             }
             
-            let text = 'HASIL PEMBAGIAN KELOMPOK\n';
-            text += '='.repeat(30) + '\n\n';
+            // Get current title
+            dataTitle = document.getElementById('dataTitle').value.trim();
+            const displayTitle = dataTitle || 'Untitled';
+            
+            let text = displayTitle + '\n';
+            text += '='.repeat(Math.max(30, displayTitle.length)) + '\n\n';
             
             groups.forEach((group, index) => {
-                text += `KELOMPOK ${index + 1} (${group.length} orang)\n`;
+                text += `${group.name || `Kelompok ${index + 1}`} (${group.members.length} orang)\n`;
                 text += '-'.repeat(20) + '\n';
-                group.forEach((p, pIndex) => {
+                group.members.forEach((p, pIndex) => {
                     const gender = p.gender ? ` (${p.gender})` : '';
                     text += `${pIndex + 1}. ${p.name}${gender}\n`;
                 });
@@ -1989,8 +2349,13 @@
             if (confirmed) {
                 participants = [];
                 groups = [];
+                hasImportedData = false;
+                lastGeneratedParticipants = [];
+                isUpdateMode = false;
+                dataTitle = '';
                 document.getElementById('participantList').innerHTML = '';
                 document.getElementById('resultsSection').classList.remove('show');
+                document.getElementById('dataTitle').value = '';
                 document.getElementById('numGroups').value = '2';
                 document.getElementById('enableGenderMin').checked = false;
                 document.getElementById('separateByGender').checked = false;
@@ -2006,44 +2371,356 @@
                 document.getElementById('enableGenderMin').disabled = false;
                 handleGenderOptionsChange();
                 addParticipant();
-                updateInfo();
+                updateInfo(); // This will also update button text
+                updateGenerateButton(); // Ensure button is reset to "Buat Kelompok"
                 showAlert('Data berhasil direset!', 'success');
             }
         }
 
 
-        // Save groups to TXT
-        function saveGroups() {
+        // Save groups as Image
+        function saveGroupsImage() {
             if (groups.length === 0) {
                 showAlert('Tidak ada kelompok untuk disimpan!', 'error');
                 return;
             }
             
             try {
+                // Calculate dimensions with improved spacing
+                const padding = 50; // Outer padding
+                const groupSpacing = 25; // Space between group cards
+                const cardPadding = 20; // Internal card padding
+                const headerHeight = 130;
+                const headerPadding = 20;
+                const footerHeight = 110;
+                const footerPadding = 20;
+                
+                // Calculate stats
+                const totalParticipants = groups.reduce((sum, group) => sum + group.members.length, 0);
+                const totalMale = groups.reduce((sum, group) => 
+                    sum + group.members.filter(p => p.gender === 'putra').length, 0
+                );
+                const totalFemale = groups.reduce((sum, group) => 
+                    sum + group.members.filter(p => p.gender === 'putri').length, 0
+                );
+                
+                // Calculate canvas dimensions
+                const maxGroupWidth = 400;
+                const groupsPerRow = Math.ceil(Math.sqrt(groups.length));
+                const rows = Math.ceil(groups.length / groupsPerRow);
+                
+                const canvasWidth = Math.min(1200, padding * 2 + groupsPerRow * maxGroupWidth + (groupsPerRow - 1) * groupSpacing);
+                const groupsPerRowActual = Math.min(groupsPerRow, groups.length);
+                const groupWidth = (canvasWidth - padding * 2 - (groupsPerRowActual - 1) * groupSpacing) / groupsPerRowActual;
+                
+                // Calculate row heights first
+                const rowHeights = [];
+                const groupHeaderHeight = 55;
+                const participantItemHeight = 36;
+                const groupStatsHeight = 30;
+                const groupBottomPadding = 15;
+                
+                for (let r = 0; r < rows; r++) {
+                    let rowMaxHeight = 0;
+                    for (let c = 0; c < groupsPerRowActual; c++) {
+                        const idx = r * groupsPerRowActual + c;
+                        if (idx < groups.length) {
+                            const h = groupHeaderHeight + (groups[idx].members.length * participantItemHeight) + groupStatsHeight + groupBottomPadding;
+                            if (h > rowMaxHeight) rowMaxHeight = h;
+                        }
+                    }
+                    rowHeights.push(rowMaxHeight);
+                }
+                
+                // Calculate final height
+                let totalRowsHeight = 0;
+                rowHeights.forEach((height, index) => {
+                    totalRowsHeight += height;
+                    if (index < rowHeights.length - 1) {
+                        totalRowsHeight += groupSpacing;
+                    }
+                });
+                const contentStartY = headerHeight + padding;
+                const finalY = contentStartY + totalRowsHeight;
+                const footerY = finalY + padding;
+                const canvasHeight = footerY + footerHeight;
+                
+                // Create canvas with final dimensions
+                const canvas = document.createElement('canvas');
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+                const ctx = canvas.getContext('2d');
+                
+                // Background gradient
+                const bgGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                bgGradient.addColorStop(0, '#f5f6f7');
+                bgGradient.addColorStop(1, '#eef1f3');
+                ctx.fillStyle = bgGradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Header
+                ctx.fillStyle = '#2c3e50';
+                ctx.fillRect(0, 0, canvas.width, headerHeight);
+                
+                // Get current title
+                dataTitle = document.getElementById('dataTitle').value.trim();
+                const displayTitle = dataTitle || 'Untitled';
+                
+                // Header title (keep original case)
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 38px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(displayTitle, canvas.width / 2, headerPadding + 25);
+                
+                ctx.font = '17px Arial';
+                ctx.fillStyle = '#ecf0f1';
+                ctx.fillText('Splitter - Pembagian Kelompok Dengan Cara Yang Berbeda', canvas.width / 2, headerPadding + 55);
+                
+                // Date
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('id-ID', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                ctx.font = '13px Arial';
+                ctx.fillText(dateStr, canvas.width / 2, headerPadding + 85);
+                
+                // Draw each group
+                let currentY = contentStartY;
+                groups.forEach((group, groupIndex) => {
+                    const row = Math.floor(groupIndex / groupsPerRowActual);
+                    const col = groupIndex % groupsPerRowActual;
+                    
+                    // Update Y position when starting a new row
+                    if (col === 0 && row > 0) {
+                        currentY += rowHeights[row - 1] + groupSpacing;
+                    }
+                    
+                    const x = padding + col * (groupWidth + groupSpacing);
+                    
+                    // Calculate card height
+                    const cardHeight = groupHeaderHeight + (group.members.length * participantItemHeight) + groupStatsHeight + groupBottomPadding;
+                    
+                    // Group card background with shadow
+                    ctx.fillStyle = '#ffffff';
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.12)';
+                    ctx.shadowBlur = 12;
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 3;
+                    ctx.fillRect(x, currentY, groupWidth, cardHeight);
+                    ctx.shadowBlur = 0;
+                    
+                    // Group header
+                    const headerGradient = ctx.createLinearGradient(x, currentY, x, currentY + groupHeaderHeight);
+                    headerGradient.addColorStop(0, '#2c3e50');
+                    headerGradient.addColorStop(1, '#34495e');
+                    ctx.fillStyle = headerGradient;
+                    ctx.fillRect(x, currentY, groupWidth, groupHeaderHeight);
+                    
+                    // Group title
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold 24px Arial';
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'top';
+                    const groupName = group.name || `Kelompok ${groupIndex + 1}`;
+                    ctx.fillText(groupName, x + cardPadding, currentY + 15);
+                    
+                    // Group count
+                    ctx.font = '14px Arial';
+                    ctx.fillStyle = '#ecf0f1';
+                    ctx.fillText(`${group.members.length} orang`, x + cardPadding, currentY + 40);
+                    
+                    // Participants list
+                    let participantY = currentY + groupHeaderHeight + 8;
+                    group.members.forEach((participant, pIndex) => {
+                        // Participant background (alternating)
+                        if (pIndex % 2 === 0) {
+                            ctx.fillStyle = '#f8f9fa';
+                            ctx.fillRect(x + cardPadding / 2, participantY - 2, groupWidth - cardPadding, participantItemHeight - 4);
+                        }
+                        
+                        // Calculate gender badge dimensions first (if exists)
+                        let badgeWidthActual = 0;
+                        let badgeX = 0;
+                        let badgeY = 0;
+                        const badgeMargin = cardPadding;
+                        const badgePadding = 8;
+                        const badgeHeight = 24;
+                        
+                        if (participant.gender) {
+                            // Prepare gender text and measure it
+                            ctx.font = '12px Arial';
+                            const genderText = participant.gender === 'putra' ? '👨 Putra' : '👩 Putri';
+                            const textMetrics = ctx.measureText(genderText);
+                            
+                            // Calculate badge dimensions with proper padding
+                            const badgeTextWidth = textMetrics.width;
+                            badgeWidthActual = badgeTextWidth + (badgePadding * 2);
+                            
+                            // Position badge at the right edge with margin
+                            badgeX = x + groupWidth - badgeWidthActual - badgeMargin;
+                            badgeY = participantY + 4;
+                        }
+                        
+                        // Participant number
+                        ctx.fillStyle = '#7f8c8d';
+                        ctx.font = '14px Arial';
+                        ctx.textAlign = 'left';
+                        ctx.textBaseline = 'middle';
+                        const numberX = x + cardPadding;
+                        ctx.fillText(`${pIndex + 1}.`, numberX, participantY + participantItemHeight / 2);
+                        
+                        // Participant name
+                        ctx.fillStyle = '#2c3e50';
+                        ctx.font = '16px Arial';
+                        const name = participant.name || 'Tanpa Nama';
+                        
+                        // Calculate available width for name (considering gender badge if exists)
+                        const nameStartX = x + cardPadding + 25;
+                        const nameMargin = 8;
+                        const maxNameWidth = (badgeWidthActual > 0 ? badgeX - nameStartX - nameMargin : groupWidth - nameStartX - badgeMargin);
+                        
+                        let displayName = name;
+                        const nameMetrics = ctx.measureText(name);
+                        if (nameMetrics.width > maxNameWidth) {
+                            // Truncate name
+                            while (ctx.measureText(displayName + '...').width > maxNameWidth && displayName.length > 0) {
+                                displayName = displayName.slice(0, -1);
+                            }
+                            displayName += '...';
+                        }
+                        ctx.fillText(displayName, nameStartX, participantY + participantItemHeight / 2);
+                        
+                        // Gender badge
+                        if (participant.gender) {
+                            const genderText = participant.gender === 'putra' ? '👨 Putra' : '👩 Putri';
+                            
+                            // Draw badge background with rounded corners
+                            ctx.fillStyle = participant.gender === 'putra' ? '#3498db' : '#e91e63';
+                            ctx.beginPath();
+                            ctx.roundRect(badgeX, badgeY, badgeWidthActual, badgeHeight, 6);
+                            ctx.fill();
+                            
+                            // Draw badge text (centered)
+                            ctx.fillStyle = '#ffffff';
+                            ctx.font = '12px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText(genderText, badgeX + badgeWidthActual / 2, badgeY + badgeHeight / 2);
+                            
+                            // Reset text alignment for next elements
+                            ctx.textAlign = 'left';
+                            ctx.textBaseline = 'top';
+                        }
+                        
+                        participantY += participantItemHeight;
+                    });
+                    
+                    // Group stats
+                    const maleCount = group.members.filter(p => p.gender === 'putra').length;
+                    const femaleCount = group.members.filter(p => p.gender === 'putri').length;
+                    
+                    if (maleCount > 0 || femaleCount > 0) {
+                        ctx.textAlign = 'left';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillStyle = '#7f8c8d';
+                        ctx.font = '13px Arial';
+                        const statsY = participantY + groupStatsHeight / 2;
+                        ctx.fillText(`👨 ${maleCount} Putra | 👩 ${femaleCount} Putri`, x + cardPadding, statsY);
+                    }
+                });
+                
+                // Footer with summary
+                ctx.fillStyle = '#34495e';
+                ctx.fillRect(0, footerY, canvas.width, footerHeight);
+                
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 22px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                ctx.fillText('RINGKASAN KESELURUHAN', canvas.width / 2, footerY + footerPadding);
+                
+                ctx.font = '16px Arial';
+                const summaryY = footerY + footerPadding + 35;
+                const summaryItems = [
+                    `Total Peserta: ${totalParticipants} orang`,
+                    `Total Kelompok: ${groups.length} kelompok`,
+                    `Total Putra: ${totalMale} orang`,
+                    `Total Putri: ${totalFemale} orang`
+                ];
+                
+                const itemWidth = canvas.width / summaryItems.length;
+                summaryItems.forEach((item, index) => {
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(item, (index + 0.5) * itemWidth, summaryY);
+                });
+                
+                // Download image
+                canvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    const timestamp = now.toISOString().slice(0, 19).replace(/:/g, '-');
+                    link.download = `Kelompok_${timestamp}.png`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                    
+                    showAlert('Kelompok berhasil disimpan sebagai gambar!', 'success');
+                }, 'image/png');
+                
+            } catch (e) {
+                console.error('Save groups error:', e);
+                showAlert('Gagal menyimpan kelompok!', 'error');
+            }
+        }
+        
+        // Save groups to TXT
+        function saveGroupsTxt() {
+            if (groups.length === 0) {
+                showAlert('Tidak ada kelompok untuk disimpan!', 'error');
+                return;
+            }
+            
+            try {
+                // Get current title
+                dataTitle = document.getElementById('dataTitle').value.trim();
+                const displayTitle = dataTitle || 'Untitled';
+                
                 let textContent = '';
                 const lineBreak = '\r\n';
                 
+                // Add title (keep original case)
+                textContent += displayTitle + lineBreak;
+                textContent += '='.repeat(Math.max(30, displayTitle.length)) + lineBreak;
+                textContent += lineBreak;
+                
                 // Prepare data for each group
                 groups.forEach((group, groupIndex) => {
-                    // Group title
-                    const groupTitle = 'KELOMPOK ' + (groupIndex + 1);
+                    // Group title (keep original case)
+                    const groupTitle = group.name || `Kelompok ${groupIndex + 1}`;
                     textContent += groupTitle + lineBreak;
                     textContent += '='.repeat(groupTitle.length) + lineBreak;
                     
                     // Add participants
-                    group.forEach((participant, index) => {
+                    group.members.forEach((participant, index) => {
                         const name = participant.name || 'Tanpa Nama';
                         const gender = participant.gender ? ` (${participant.gender})` : '';
                         textContent += `${index + 1}. ${name}${gender}` + lineBreak;
                     });
                     
                     // Group summary
-                    const maleCount = group.filter(p => p.gender === 'putra').length;
-                    const femaleCount = group.filter(p => p.gender === 'putri').length;
+                    const maleCount = group.members.filter(p => p.gender === 'putra').length;
+                    const femaleCount = group.members.filter(p => p.gender === 'putri').length;
                     
                     textContent += lineBreak;
                     textContent += 'Ringkasan:' + lineBreak;
-                    textContent += `- Total: ${group.length} orang` + lineBreak;
+                    textContent += `- Total: ${group.members.length} orang` + lineBreak;
                     textContent += `- Putra: ${maleCount} orang` + lineBreak;
                     textContent += `- Putri: ${femaleCount} orang` + lineBreak;
                     textContent += lineBreak;
@@ -2051,12 +2728,12 @@
                 });
                 
                 // Overall summary
-                const totalParticipants = groups.reduce((sum, group) => sum + group.length, 0);
+                const totalParticipants = groups.reduce((sum, group) => sum + group.members.length, 0);
                 const totalMale = groups.reduce((sum, group) => 
-                    sum + group.filter(p => p.gender === 'putra').length, 0
+                    sum + group.members.filter(p => p.gender === 'putra').length, 0
                 );
                 const totalFemale = groups.reduce((sum, group) => 
-                    sum + group.filter(p => p.gender === 'putri').length, 0
+                    sum + group.members.filter(p => p.gender === 'putri').length, 0
                 );
                 const avgPerGroup = groups.length > 0 ? (totalParticipants / groups.length).toFixed(2) : 0;
                 
@@ -2087,9 +2764,26 @@
                 
                 showAlert('Kelompok berhasil disimpan ke ' + filename, 'success');
             } catch (e) {
-                console.error('Save groups error:', e);
+                console.error('Save groups TXT error:', e);
                 showAlert('Gagal menyimpan kelompok!', 'error');
             }
+        }
+        
+        // Helper function for rounded rectangles (if not supported)
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+                this.beginPath();
+                this.moveTo(x + radius, y);
+                this.lineTo(x + width - radius, y);
+                this.quadraticCurveTo(x + width, y, x + width, y + radius);
+                this.lineTo(x + width, y + height - radius);
+                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                this.lineTo(x + radius, y + height);
+                this.quadraticCurveTo(x, y + height, x, y + height - radius);
+                this.lineTo(x, y + radius);
+                this.quadraticCurveTo(x, y, x + radius, y);
+                this.closePath();
+            };
         }
 
         // Load groups from TXT file
@@ -2131,13 +2825,53 @@
                     // Extract all participants from groups
                     const allParticipants = [];
                     loadedGroups.forEach(group => {
-                        group.forEach(participant => {
+                        const members = group.members || group; // Support both old and new format
+                        members.forEach(participant => {
                             allParticipants.push({
                                 name: participant.name,
                                 gender: participant.gender || ''
                             });
                         });
                     });
+                    
+                    // Convert old format to new format if needed
+                    if (loadedGroups.length > 0 && !loadedGroups[0].name) {
+                        loadedGroups = loadedGroups.map((group, index) => ({
+                            name: `Kelompok ${index + 1}`,
+                            members: group.members || group
+                        }));
+                    }
+                    
+                    // Extract title from file (first line before separator)
+                    const lines = text.split(/\r?\n/);
+                    let extractedTitle = '';
+                    // Look for title pattern: non-empty line followed by separator line
+                    for (let i = 0; i < Math.min(3, lines.length); i++) {
+                        const line = lines[i].trim();
+                        if (line && !line.match(/^=+$/) && !line.match(/^KELOMPOK\s+\d+/i) && !line.match(/^\d+\./)) {
+                            // Check if next non-empty line is a separator
+                            for (let j = i + 1; j < Math.min(i + 3, lines.length); j++) {
+                                const nextLine = lines[j].trim();
+                                if (nextLine.match(/^=+$/)) {
+                                    extractedTitle = line;
+                                    break;
+                                }
+                                if (nextLine && !nextLine.match(/^=+$/)) {
+                                    break; // Not a title, it's probably a group name
+                                }
+                            }
+                            if (extractedTitle !== '') break;
+                        }
+                    }
+                    
+                    // If extracted title is "Untitled", treat it as empty
+                    if (extractedTitle === 'Untitled') {
+                        extractedTitle = '';
+                    }
+                    
+                    // Update title
+                    dataTitle = extractedTitle;
+                    document.getElementById('dataTitle').value = extractedTitle;
                     
                     // Update participants list
                     participants = allParticipants;
@@ -2148,9 +2882,17 @@
                     
                     // Load groups
                     groups = loadedGroups;
+                    
+                    // Save snapshot of participants after import
+                    lastGeneratedParticipants = allParticipants.map(p => ({
+                        name: p.name.trim(),
+                        gender: p.gender || ''
+                    }));
+                    hasImportedData = true; // Mark that data was imported
+                    
                     displayResults();
                     document.getElementById('resultsSection').classList.add('show');
-                    updateInfo();
+                    updateInfo(); // This will also update button text
                     
                     // Scroll to results
                     document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2176,6 +2918,7 @@
             let inSummarySection = false;
             let inTable = false;
             let isOldFormat = false;
+            let titleSkipped = false;
             
             // Detect format: if file contains table characters (│), use old format parser
             if (text.includes('│') || text.includes('═') || text.includes('─')) {
@@ -2191,17 +2934,32 @@
                     continue;
                 }
                 
+                // Skip title at the beginning (first non-empty line followed by separator)
+                if (!titleSkipped && i < 3) {
+                    const nextLine = i + 1 < lines.length ? lines[i + 1].trim() : '';
+                    if (nextLine.match(/^=+$/)) {
+                        // This is a title, skip it and the separator
+                        titleSkipped = true;
+                        i++; // Skip separator line too
+                        continue;
+                    }
+                    titleSkipped = true; // Mark as checked
+                }
+                
                 // OLD FORMAT PARSER (table format)
                 if (isOldFormat) {
                     // Check for group header (KELOMPOK X)
                     const groupMatch = trimmedLine.match(/KELOMPOK\s+(\d+)/i);
                     if (groupMatch) {
                         // Save previous group if exists
-                        if (currentGroup && currentGroup.length > 0) {
+                        if (currentGroup && currentGroup.members && currentGroup.members.length > 0) {
                             groups.push(currentGroup);
                         }
                         // Start new group
-                        currentGroup = [];
+                        currentGroup = {
+                            name: `Kelompok ${groupMatch[1]}`,
+                            members: []
+                        };
                         inTable = false;
                         continue;
                     }
@@ -2242,7 +3000,10 @@
                                 const cleanName = name.replace(/\s+/g, ' ').trim();
                                 const cleanGender = (gender === 'putra' || gender === 'putri') ? gender : '';
                                 
-                                currentGroup.push({
+                                if (!currentGroup.members) {
+                                    currentGroup.members = [];
+                                }
+                                currentGroup.members.push({
                                     name: cleanName,
                                     gender: cleanGender
                                 });
@@ -2259,17 +3020,58 @@
                 }
                 
                 // NEW FORMAT PARSER (simple format)
-                // Check for group header (KELOMPOK X)
+                // Check for group header (KELOMPOK X or custom name)
+                // Try to match "KELOMPOK X" (case insensitive) or any custom name
                 const groupMatch = trimmedLine.match(/^KELOMPOK\s+(\d+)$/i);
-                if (groupMatch) {
-                    // Save previous group if exists
-                    if (currentGroup && currentGroup.length > 0) {
-                        groups.push(currentGroup);
+                
+                // Check if this could be a new group header
+                // It should not be a participant line, summary line, or separator
+                const isParticipantLine = trimmedLine.match(/^\d+\.\s+/);
+                const isSummaryLine = trimmedLine.toLowerCase().includes('ringkasan') || trimmedLine.startsWith('-');
+                const isSeparator = trimmedLine.match(/^=+$/);
+                
+                // If we're in summary section and find a potential group header, reset summary section
+                if (inSummarySection && !isParticipantLine && !isSummaryLine && !isSeparator && trimmedLine.length > 0) {
+                    // This might be a new group, check if it looks like a group name
+                    if (groupMatch || (!trimmedLine.match(/^\d+\./) && trimmedLine.length > 0)) {
+                        // Save previous group
+                        if (currentGroup && currentGroup.members && currentGroup.members.length > 0) {
+                            groups.push(currentGroup);
+                        }
+                        // Start new group
+                        const groupName = groupMatch ? `Kelompok ${groupMatch[1]}` : trimmedLine;
+                        currentGroup = {
+                            name: groupName,
+                            members: []
+                        };
+                        inSummarySection = false;
+                        continue;
                     }
-                    // Start new group
-                    currentGroup = [];
-                    inSummarySection = false;
-                    continue;
+                }
+                
+                // Normal group header detection (when not in summary section)
+                if (!inSummarySection) {
+                    const customNameMatch = !groupMatch && !isParticipantLine && 
+                                           !trimmedLine.startsWith('-') && 
+                                           !isSeparator &&
+                                           !trimmedLine.toLowerCase().includes('ringkasan') &&
+                                           trimmedLine.length > 0 &&
+                                           !currentGroup;
+                    
+                    if (groupMatch || customNameMatch) {
+                        // Save previous group if exists
+                        if (currentGroup && currentGroup.members && currentGroup.members.length > 0) {
+                            groups.push(currentGroup);
+                        }
+                        // Start new group
+                        const groupName = groupMatch ? `Kelompok ${groupMatch[1]}` : trimmedLine;
+                        currentGroup = {
+                            name: groupName,
+                            members: []
+                        };
+                        inSummarySection = false;
+                        continue;
+                    }
                 }
                 
                 // Skip separator lines (lines with only = characters)
@@ -2277,21 +3079,21 @@
                     continue;
                 }
                 
-                // Check if we're in summary section - stop reading participants
-                if (trimmedLine.toLowerCase() === 'ringkasan:' || 
-                    (trimmedLine.toLowerCase().includes('ringkasan') && !trimmedLine.toLowerCase().includes('keseluruhan'))) {
-                    inSummarySection = true;
-                    continue;
-                }
-                
                 // Check for overall summary section - stop processing
                 if (trimmedLine.toUpperCase() === 'RINGKASAN KESELURUHAN') {
                     // Save last group before overall summary
-                    if (currentGroup && currentGroup.length > 0) {
+                    if (currentGroup && currentGroup.members && currentGroup.members.length > 0) {
                         groups.push(currentGroup);
                         currentGroup = null;
                     }
                     break;
+                }
+                
+                // Check if we're in summary section - stop reading participants for current group
+                if (trimmedLine.toLowerCase() === 'ringkasan:' || 
+                    (trimmedLine.toLowerCase().includes('ringkasan') && !trimmedLine.toLowerCase().includes('keseluruhan'))) {
+                    inSummarySection = true;
+                    continue;
                 }
                 
                 // Skip summary lines (lines starting with "-")
@@ -2299,8 +3101,38 @@
                     continue;
                 }
                 
+                // After summary section, if we find a non-empty line that's not a summary line,
+                // it might be a new group header
+                if (inSummarySection && trimmedLine !== '' && !trimmedLine.startsWith('-')) {
+                    // Check if this looks like a group header
+                    const looksLikeGroupHeader = !trimmedLine.match(/^\d+\./) && 
+                                                 !trimmedLine.match(/^=+$/) &&
+                                                 !trimmedLine.toLowerCase().includes('ringkasan');
+                    
+                    if (looksLikeGroupHeader) {
+                        // Save previous group
+                        if (currentGroup && currentGroup.members && currentGroup.members.length > 0) {
+                            groups.push(currentGroup);
+                        }
+                        // Check if it's a numbered group or custom name
+                        const groupMatch = trimmedLine.match(/^KELOMPOK\s+(\d+)$/i);
+                        const groupName = groupMatch ? `Kelompok ${groupMatch[1]}` : trimmedLine;
+                        currentGroup = {
+                            name: groupName,
+                            members: []
+                        };
+                        inSummarySection = false;
+                        continue;
+                    }
+                }
+                
+                // Skip empty lines
+                if (trimmedLine === '') {
+                    continue;
+                }
+                
                 // Parse participant line (format: "1. Nama (gender)" or "1. Nama")
-                if (currentGroup && !inSummarySection) {
+                if (currentGroup && currentGroup.members && !inSummarySection) {
                     const participantMatch = trimmedLine.match(/^\d+\.\s+(.+?)(?:\s+\((\w+)\))?$/);
                     if (participantMatch) {
                         const name = participantMatch[1].trim();
@@ -2308,7 +3140,7 @@
                         
                         if (name && name !== 'Tanpa Nama') {
                             const cleanGender = (gender === 'putra' || gender === 'putri') ? gender : '';
-                            currentGroup.push({
+                            currentGroup.members.push({
                                 name: name,
                                 gender: cleanGender
                             });
@@ -2318,7 +3150,7 @@
             }
             
             // Don't forget the last group
-            if (currentGroup && currentGroup.length > 0) {
+            if (currentGroup && currentGroup.members && currentGroup.members.length > 0) {
                 groups.push(currentGroup);
             }
             
