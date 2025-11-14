@@ -13,6 +13,7 @@ Aplikasi web untuk membagi peserta ke dalam kelompok secara otomatis dan acak de
 ## 📋 Deskripsi
 
 Splitter adalah aplikasi web berbasis HTML, CSS, dan JavaScript yang memungkinkan Anda untuk:
+- Menggunakan aplikasi dalam Bahasa Indonesia atau English (dengan language switcher)
 - Membagi peserta ke dalam beberapa kelompok secara otomatis
 - Mengatur distribusi berdasarkan gender (Putra/Putri)
 - Memberikan nama custom untuk setiap kelompok
@@ -21,33 +22,39 @@ Splitter adalah aplikasi web berbasis HTML, CSS, dan JavaScript yang memungkinka
 
 ## ✨ Fitur Utama
 
-### 1. **Judul Data (Opsional)**
+### 1. **Multi-Language Support / Dukungan Multi Bahasa**
+- 🌐 **Switch Bahasa**: Toggle antara Bahasa Indonesia dan English
+- Semua UI text otomatis ter-translate sesuai bahasa yang dipilih
+- Language switcher tersedia di header (kanan atas)
+- Responsif di semua device
+
+### 2. **Judul Data (Opsional)**
 - Tambahkan judul untuk data kelompok Anda
 - Jika tidak diisi, akan menggunakan "Untitled" secara otomatis
 - Judul akan muncul di semua output (hasil, gambar, file TXT)
 
-### 2. **Manajemen Peserta**
+### 3. **Manajemen Peserta**
 - Tambah peserta dengan mudah (satu per satu)
 - **Tambah Peserta Secara Bulk**: Tambahkan banyak peserta sekaligus dengan mengetik nama, satu per baris
 - Pilih jenis kelamin untuk setiap peserta (Putra/Putri) - opsional
 - Hapus peserta yang tidak diperlukan
 - Validasi nama peserta
 
-### 3. **Pengaturan Gender**
+### 4. **Pengaturan Gender**
 - **Pisahkan berdasarkan gender**: Memisahkan Putra dan Putri ke kelompok terpisah
 - **Minimal gender per kelompok**: Atur jumlah minimal Putra/Putri per kelompok untuk distribusi seimbang
 
-### 4. **Penamaan Kelompok**
+### 5. **Penamaan Kelompok**
 - Setiap kelompok dapat diberi nama custom
 - Edit nama kelompok langsung di hasil pembagian
 - Nama kelompok tersimpan dan muncul di semua output
 
-### 5. **Update Kelompok**
+### 6. **Update Kelompok**
 - Tombol "Buat Kelompok" otomatis berubah menjadi "Update Kelompok" setelah hasil ditampilkan
 - Update kelompok yang sudah ada dengan perubahan peserta baru/hapus
 - Mempertahankan struktur kelompok yang sudah ada
 
-### 6. **Export & Import Data**
+### 7. **Export & Import Data**
 - **Simpan sebagai Gambar**: Export hasil sebagai file PNG untuk tampilan/print
 - **Simpan sebagai TXT**: Export hasil sebagai file teks yang bisa diimport kembali
 - **Import Data**: Muat data dari file TXT yang sebelumnya disimpan
@@ -55,13 +62,20 @@ Splitter adalah aplikasi web berbasis HTML, CSS, dan JavaScript yang memungkinka
   - Memuat nama kelompok custom
   - Memuat semua peserta dengan gender
 
-### 7. **Fitur Tambahan**
+### 8. **Fitur Tambahan**
 - Salin hasil ke clipboard
 - Acak ulang pembagian kelompok
 - Reset semua data
 - Statistik real-time (Total Peserta, Jumlah Kelompok, Rata-rata per Kelompok)
 
 ## 🚀 Cara Penggunaan
+
+### Switch Bahasa / Language Switcher
+
+1. **Mengganti Bahasa**
+   - Klik tombol **"ID"** atau **"EN"** di header (kanan atas)
+   - Semua teks UI akan otomatis berubah sesuai bahasa yang dipilih
+   - Pengaturan bahasa tersimpan selama sesi browser
 
 ### Persiapan Data
 
@@ -213,6 +227,11 @@ Aplikasi ini cocok untuk:
 
 ## 🔄 Versi
 
+**Versi 1.2** - Update dengan:
+- 🌐 **Multi-Language Support**: Fitur switch bahasa (Bahasa Indonesia & English)
+- Semua UI text dapat diubah bahasa secara real-time
+- Language switcher di header dengan desain responsif
+
 **Versi 1.1** - Update dengan:
 - ✨ **Fitur Bulk Add Peserta**: Tambahkan banyak peserta sekaligus dengan textarea
 - 📱 **Perbaikan Responsivitas UI**: Optimasi untuk desktop, tablet, dan mobile device
@@ -258,6 +277,7 @@ Web application for automatically and randomly dividing participants into groups
 ## 📋 Description
 
 Splitter is a web application based on HTML, CSS, and JavaScript that allows you to:
+- Use the application in Bahasa Indonesia or English (with language switcher)
 - Automatically divide participants into multiple groups
 - Configure distribution based on gender (Male/Female)
 - Provide custom names for each group
@@ -266,33 +286,39 @@ Splitter is a web application based on HTML, CSS, and JavaScript that allows you
 
 ## ✨ Main Features
 
-### 1. **Data Title (Optional)**
+### 1. **Multi-Language Support / Multi Bahasa**
+- 🌐 **Language Switcher**: Toggle between Bahasa Indonesia and English
+- All UI text automatically translates based on selected language
+- Language switcher available in header (top right)
+- Responsive on all devices
+
+### 2. **Data Title (Optional)**
 - Add a title for your group data
 - If not filled, will automatically use "Untitled"
 - Title will appear in all outputs (results, images, TXT files)
 
-### 2. **Participant Management**
+### 3. **Participant Management**
 - Easily add participants (one by one)
 - **Bulk Add Participants**: Add multiple participants at once by typing names, one per line
 - Select gender for each participant (Male/Female) - optional
 - Remove unnecessary participants
 - Participant name validation
 
-### 3. **Gender Settings**
+### 4. **Gender Settings**
 - **Separate by gender**: Separates Male and Female into separate groups
 - **Minimum gender per group**: Set minimum number of Male/Female per group for balanced distribution
 
-### 4. **Group Naming**
+### 5. **Group Naming**
 - Each group can be given a custom name
 - Edit group name directly in the division results
 - Group names are saved and appear in all outputs
 
-### 5. **Update Groups**
+### 6. **Update Groups**
 - "Create Groups" button automatically changes to "Update Groups" after results are displayed
 - Update existing groups with new participant additions/deletions
 - Maintains existing group structure
 
-### 6. **Export & Import Data**
+### 7. **Export & Import Data**
 - **Save as Image**: Export results as PNG file for display/printing
 - **Save as TXT**: Export results as text file that can be imported back
 - **Import Data**: Load data from previously saved TXT file
@@ -300,13 +326,20 @@ Splitter is a web application based on HTML, CSS, and JavaScript that allows you
   - Loads custom group names
   - Loads all participants with gender
 
-### 7. **Additional Features**
+### 8. **Additional Features**
 - Copy results to clipboard
 - Randomize group division again
 - Reset all data
 - Real-time statistics (Total Participants, Number of Groups, Average per Group)
 
 ## 🚀 How to Use
+
+### Language Switcher / Switch Bahasa
+
+1. **Change Language**
+   - Click **"ID"** or **"EN"** button in the header (top right)
+   - All UI text will automatically change according to selected language
+   - Language setting persists during browser session
 
 ### Data Preparation
 
@@ -457,6 +490,11 @@ This application is suitable for:
 - **Update Groups**: Update feature maintains existing group structure and only adds/removes participants
 
 ## 🔄 Version
+
+**Version 1.2** - Update with:
+- 🌐 **Multi-Language Support**: Language switcher feature (Bahasa Indonesia & English)
+- All UI text can be changed in real-time
+- Language switcher in header with responsive design
 
 **Version 1.1** - Update with:
 - ✨ **Bulk Add Participants Feature**: Add multiple participants at once with textarea
