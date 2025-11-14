@@ -106,9 +106,8 @@ Splitter adalah aplikasi web berbasis HTML, CSS, dan JavaScript yang memungkinka
 ## 📁 Struktur File
 
 ```
-teampick/
-├── index-simple.html    # File utama aplikasi (versi lengkap)
-├── index.html           # File alternatif
+Splitter/
+├── index.html           # File utama aplikasi
 └── README.md           # Dokumentasi proyek
 ```
 
