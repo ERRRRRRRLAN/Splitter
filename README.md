@@ -212,5 +212,5 @@ Jika Anda ingin berkontribusi atau melaporkan bug, silakan buat issue atau pull 
 
 ---
 
-**Dikembangkan dengan ❤️ untuk memudahkan pembagian kelompok**
+**Dibuat dan dikembangkan oleh Erlan Nauval Aqilah**
 
