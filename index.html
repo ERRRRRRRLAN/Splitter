@@ -63,6 +63,14 @@
             .main-content {
                 grid-template-columns: 1fr;
             }
+
+            .groups-container {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+
+            .group-name-input {
+                font-size: 0.95rem;
+            }
         }
 
         /* Mobile landscape and below */
@@ -104,6 +112,27 @@
 
             .groups-container {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .group-header {
+                gap: 8px;
+            }
+
+            .group-name-input {
+                font-size: 0.95rem;
+                padding: 7px 11px;
+            }
+
+            .group-stats {
+                font-size: 0.8rem;
+            }
+
+            .group-members li {
+                padding: 7px 9px;
+            }
+
+            textarea.form-input {
+                font-size: 0.95rem;
             }
         }
 
@@ -163,6 +192,13 @@
             border-color: #5a6c7d;
             background: #fafbfc;
             box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.08);
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            font-family: inherit;
+            line-height: 1.5;
+            min-height: 100px;
         }
 
         .participant-list {
@@ -394,6 +430,8 @@
             margin-bottom: 12px;
             padding-bottom: 10px;
             border-bottom: 1px solid #ddd;
+            min-width: 0;
+            overflow: hidden;
         }
 
         .group-title {
@@ -404,6 +442,8 @@
         
         .group-name-input {
             flex: 1;
+            min-width: 0;
+            max-width: 100%;
             padding: 8px 12px;
             border: 1px solid #bdc3c7;
             border-radius: 4px;
@@ -412,6 +452,7 @@
             background: white;
             color: #2c3e50;
             transition: all 0.2s ease;
+            box-sizing: border-box;
         }
         
         .group-name-input:focus {
@@ -424,6 +465,8 @@
         .group-stats {
             font-size: 0.85rem;
             color: #666;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .group-members {
@@ -440,6 +483,15 @@
             align-items: center;
             border-radius: 4px;
             transition: all 0.2s ease;
+            min-width: 0;
+            word-wrap: break-word;
+        }
+
+        .group-members li span:first-child {
+            flex: 1;
+            min-width: 0;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
 
         .group-members li:hover {
@@ -455,6 +507,8 @@
             color: #2c3e50;
             border: 1px solid #bdc3c7;
             border-radius: 3px;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .stats-summary {
@@ -684,6 +738,12 @@
                 font-size: 0.9rem;
             }
 
+            textarea.form-input {
+                font-size: 0.9rem;
+                padding: 8px 10px;
+                min-height: 80px;
+            }
+
             .participant-item {
                 flex-wrap: wrap;
                 padding: 10px;
@@ -754,12 +814,45 @@
                 padding: 14px;
             }
 
-            .group-title {
-                font-size: 1.1rem;
+            .group-header {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .group-name-input {
+                font-size: 0.95rem;
+                padding: 6px 10px;
+                min-width: 0;
+                width: 100%;
             }
 
             .group-stats {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
+                white-space: nowrap;
+                flex-shrink: 0;
+                width: auto;
+            }
+
+            .group-members li {
+                flex-wrap: wrap;
+                gap: 6px;
+                padding: 8px;
+            }
+
+            .group-members li span:first-child {
+                flex: 1;
+                min-width: 0;
+                word-break: break-word;
+            }
+
+            .gender-badge {
+                font-size: 0.7rem;
+                padding: 2px 6px;
+                flex-shrink: 0;
+            }
+
+            .group-title {
+                font-size: 1.1rem;
             }
 
             .min-gender-inputs {
@@ -807,6 +900,10 @@
 
         /* Small mobile */
         @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
             .header h1 {
                 font-size: 1.3rem;
             }
@@ -824,18 +921,47 @@
                 margin-bottom: 12px;
             }
 
+            .form-input {
+                padding: 7px 9px;
+                font-size: 0.85rem;
+            }
+
+            textarea.form-input {
+                font-size: 0.85rem;
+                padding: 7px 9px;
+                min-height: 70px;
+            }
+
             .stats-summary {
                 grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .stat-card {
+                padding: 10px;
+            }
+
+            .stat-value {
+                font-size: 1.3rem;
+            }
+
+            .stat-label {
+                font-size: 0.75rem;
             }
 
             .gender-radio-item {
                 padding: 4px 6px;
                 min-height: 28px;
+                font-size: 0.8rem;
             }
 
             .gender-radio-item input[type="radio"] {
                 width: 16px;
                 height: 16px;
+            }
+
+            .gender-radio-item label {
+                font-size: 0.8rem;
             }
 
             .btn-clear-gender {
@@ -853,6 +979,29 @@
                 font-size: 0.85rem;
             }
 
+            .group-card {
+                padding: 12px;
+            }
+
+            .group-name-input {
+                font-size: 0.9rem;
+                padding: 5px 8px;
+            }
+
+            .group-stats {
+                font-size: 0.7rem;
+            }
+
+            .group-members li {
+                padding: 6px;
+                font-size: 0.85rem;
+            }
+
+            .gender-badge {
+                font-size: 0.65rem;
+                padding: 2px 5px;
+            }
+
             .empty-state {
                 padding: 25px 15px;
                 font-size: 0.85rem;
@@ -864,6 +1013,11 @@
 
             .participant-list {
                 max-height: 300px;
+            }
+
+            .action-buttons .btn {
+                font-size: 0.9rem;
+                padding: 8px 16px;
             }
         }
 
@@ -1097,6 +1251,17 @@
                     <button class="btn btn-outline" id="addParticipant">
                         Tambah Peserta
                     </button>
+                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e0e0e0;">
+                        <label class="form-label" style="font-size: 0.9rem; margin-bottom: 8px;">Tambah Peserta Secara Bulk</label>
+                        <textarea 
+                            id="bulkParticipantInput" 
+                            class="form-input" 
+                            placeholder="Masukkan nama peserta, satu per baris:&#10;NAMA 1&#10;NAMA 2&#10;NAMA 3"
+                            rows="4"></textarea>
+                        <button class="btn btn-outline" id="addBulkParticipants" style="margin-top: 8px;">
+                            Tambah Semua Peserta
+                        </button>
+                    </div>
                 </div>
 
                 <div class="action-buttons">
@@ -1137,7 +1302,7 @@
                     <ol style="padding-left: 20px; line-height: 1.8; color: #666; font-size: 0.9rem;">
                         <li><strong>Judul Data (Opsional)</strong>: Masukkan judul untuk data kelompok Anda. Jika tidak diisi, akan menggunakan "Untitled" secara otomatis.</li>
                         <li><strong>Masukkan jumlah kelompok</strong> yang diinginkan</li>
-                        <li><strong>Tambahkan peserta</strong> dengan tombol "Tambah Peserta" atau tekan <strong>Enter</strong> setelah mengetik nama</li>
+                        <li><strong>Tambahkan peserta</strong> dengan tombol "Tambah Peserta" atau tekan <strong>Enter</strong> setelah mengetik nama. Atau gunakan fitur <strong>"Tambah Peserta Secara Bulk"</strong> untuk menambahkan banyak peserta sekaligus (satu nama per baris)</li>
                         <li><strong>Pilih jenis kelamin</strong> untuk setiap peserta (Putra/Putri) - opsional</li>
                         <li><strong>Pengaturan Gender</strong> (opsional):
                             <ul style="margin-top: 5px; padding-left: 20px; line-height: 1.6;">
@@ -1331,6 +1496,7 @@
             
             // Event listeners
             document.getElementById('addParticipant').addEventListener('click', addParticipant);
+            document.getElementById('addBulkParticipants').addEventListener('click', addBulkParticipants);
             document.getElementById('generateGroups').addEventListener('click', generateGroups);
             document.getElementById('resetAll').addEventListener('click', resetAll);
             
@@ -1386,6 +1552,42 @@
                     nameInput.focus();
                 }
             }, 100);
+        }
+
+        // Add bulk participants
+        function addBulkParticipants() {
+            const bulkInput = document.getElementById('bulkParticipantInput');
+            const text = bulkInput.value.trim();
+            
+            if (!text) {
+                showAlert('Silakan masukkan nama peserta!', 'error');
+                return;
+            }
+            
+            // Split by newlines and filter out empty lines
+            const names = text.split('\n')
+                .map(name => name.trim())
+                .filter(name => name !== '');
+            
+            if (names.length === 0) {
+                showAlert('Tidak ada nama yang valid untuk ditambahkan!', 'error');
+                return;
+            }
+            
+            // Add each name as a participant
+            names.forEach(name => {
+                participants.push({ name: name, gender: '' });
+            });
+            
+            // Clear the textarea
+            bulkInput.value = '';
+            
+            // Re-render and update
+            renderParticipants();
+            updateInfo();
+            
+            // Show success message
+            showAlert(`Berhasil menambahkan ${names.length} peserta!`, 'success');
         }
 
         // Handle keydown event on participant input
