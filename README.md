@@ -36,6 +36,9 @@ Splitter adalah aplikasi web berbasis HTML, CSS, dan JavaScript yang memungkinka
 ### 3. **Manajemen Peserta**
 - Tambah peserta dengan mudah (satu per satu)
 - **Tambah Peserta Secara Bulk**: Tambahkan banyak peserta sekaligus dengan mengetik nama, satu per baris
+  - **Pilih Jenis Kelamin Bulk**: Dropdown untuk memilih jenis kelamin (Putra/Putri/Tidak ada) yang akan diterapkan ke semua peserta yang ditambahkan secara bulk
+  - Jika memilih "Putra" atau "Putri", semua nama akan otomatis memiliki jenis kelamin yang dipilih
+  - Jika memilih "Tidak ada", jenis kelamin akan kosong dan bisa diatur manual setelahnya
 - Pilih jenis kelamin untuk setiap peserta (Putra/Putri) - opsional
 - Hapus peserta yang tidak diperlukan
 - Validasi nama peserta
@@ -96,8 +99,12 @@ Splitter adalah aplikasi web berbasis HTML, CSS, dan JavaScript yang memungkinka
        NAMA 2
        NAMA 3
        ```
-     - Klik tombol "Tambah Semua Peserta" untuk menambahkan semua nama sekaligus
-   - Pilih jenis kelamin untuk setiap peserta (Putra/Putri) - opsional
+     - **Pilih Jenis Kelamin**: Gunakan dropdown "Pilih Jenis Kelamin" untuk memilih jenis kelamin yang akan diterapkan ke semua nama
+       - **Putra**: Semua nama akan memiliki jenis kelamin Putra
+       - **Putri**: Semua nama akan memiliki jenis kelamin Putri
+       - **Tidak ada**: Jenis kelamin akan kosong (bisa diatur manual setelahnya)
+     - Klik tombol "Tambah Semua Peserta" untuk menambahkan semua nama sekaligus dengan jenis kelamin yang dipilih
+   - Pilih jenis kelamin untuk setiap peserta (Putra/Putri) - opsional (jika belum diatur melalui bulk add)
 
 4. **Pengaturan Gender (Opsional)**
    - **Pisahkan berdasarkan gender**: Aktifkan jika ingin Putra dan Putri terpisah
@@ -227,6 +234,11 @@ Aplikasi ini cocok untuk:
 
 ## 🔄 Versi
 
+**Versi 1.3** - Update dengan:
+- 🎯 **Pilih Jenis Kelamin pada Bulk Add**: Dropdown untuk memilih jenis kelamin (Putra/Putri/Tidak ada) yang akan diterapkan ke semua peserta yang ditambahkan secara bulk
+- Semua nama yang ditambahkan melalui bulk add akan otomatis memiliki jenis kelamin sesuai pilihan dropdown
+- Mempermudah pengaturan jenis kelamin untuk banyak peserta sekaligus
+
 **Versi 1.2** - Update dengan:
 - 🌐 **Multi-Language Support**: Fitur switch bahasa (Bahasa Indonesia & English)
 - Semua UI text dapat diubah bahasa secara real-time
@@ -300,6 +312,9 @@ Splitter is a web application based on HTML, CSS, and JavaScript that allows you
 ### 3. **Participant Management**
 - Easily add participants (one by one)
 - **Bulk Add Participants**: Add multiple participants at once by typing names, one per line
+  - **Bulk Gender Selection**: Dropdown to select gender (Male/Female/None) that will be applied to all participants added in bulk
+  - If you select "Male" or "Female", all names will automatically have the selected gender
+  - If you select "None", gender will be empty and can be set manually afterwards
 - Select gender for each participant (Male/Female) - optional
 - Remove unnecessary participants
 - Participant name validation
@@ -360,8 +375,12 @@ Splitter is a web application based on HTML, CSS, and JavaScript that allows you
        NAME 2
        NAME 3
        ```
-     - Click "Add All Participants" button to add all names at once
-   - Select gender for each participant (Male/Female) - optional
+     - **Select Gender**: Use the "Select Gender" dropdown to choose gender that will be applied to all names
+       - **Male**: All names will have Male gender
+       - **Female**: All names will have Female gender
+       - **None**: Gender will be empty (can be set manually afterwards)
+     - Click "Add All Participants" button to add all names at once with the selected gender
+   - Select gender for each participant (Male/Female) - optional (if not set through bulk add)
 
 4. **Gender Settings (Optional)**
    - **Separate by gender**: Activate if you want Male and Female separated
@@ -490,6 +509,11 @@ This application is suitable for:
 - **Update Groups**: Update feature maintains existing group structure and only adds/removes participants
 
 ## 🔄 Version
+
+**Version 1.3** - Update with:
+- 🎯 **Bulk Gender Selection**: Dropdown to select gender (Male/Female/None) that will be applied to all participants added in bulk
+- All names added through bulk add will automatically have the selected gender from dropdown
+- Makes it easier to set gender for multiple participants at once
 
 **Version 1.2** - Update with:
 - 🌐 **Multi-Language Support**: Language switcher feature (Bahasa Indonesia & English)
