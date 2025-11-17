@@ -234,6 +234,21 @@ Aplikasi ini cocok untuk:
 
 ## 🔄 Versi
 
+**Versi 1.5** - Update dengan:
+- 🔧 **Custom Dropdown untuk Bulk Gender**: Mengganti dropdown select standar dengan custom dropdown yang sesuai tema
+- ✅ **Perbaikan Bug**: Memperbaiki bug duplikasi icon panah pada dropdown pilih jenis kelamin
+- 🎨 **UI Dropdown Custom**: Dropdown dengan animasi fade-in, hover effects, dan styling yang konsisten dengan tema website
+- ⌨️ **Keyboard Support**: Support untuk tombol Escape untuk menutup dropdown
+
+**Versi 1.4** - Update dengan:
+- 🎨 **Peningkatan UI/UX Menyeluruh**: Perbaikan desain antarmuka dan pengalaman pengguna secara keseluruhan
+- ✨ **Typography & Spacing**: Peningkatan readability dengan font system yang lebih baik, line-height optimal, dan spacing yang lebih natural
+- 🎭 **Animations & Transitions**: Transisi yang lebih halus dengan cubic-bezier easing untuk interaksi yang lebih natural
+- 🎯 **Visual Hierarchy**: Shadows multi-layer dan depth yang lebih baik untuk hierarki visual yang jelas
+- 🖱️ **Micro-interactions**: Hover effects, focus states, dan active states yang lebih responsif dan human-like
+- 📐 **Form Improvements**: Input fields dengan focus states yang lebih jelas, custom select dropdown, dan scrollbar styling yang lebih baik
+- 🎴 **Card Designs**: Hover effects yang lebih halus, border radius yang konsisten, dan visual feedback yang lebih baik
+
 **Versi 1.3** - Update dengan:
 - 🎯 **Pilih Jenis Kelamin pada Bulk Add**: Dropdown untuk memilih jenis kelamin (Putra/Putri/Tidak ada) yang akan diterapkan ke semua peserta yang ditambahkan secara bulk
 - Semua nama yang ditambahkan melalui bulk add akan otomatis memiliki jenis kelamin sesuai pilihan dropdown
@@ -509,6 +524,21 @@ This application is suitable for:
 - **Update Groups**: Update feature maintains existing group structure and only adds/removes participants
 
 ## 🔄 Version
+
+**Version 1.5** - Update with:
+- 🔧 **Custom Dropdown for Bulk Gender**: Replaced standard select dropdown with custom dropdown matching the theme
+- ✅ **Bug Fix**: Fixed duplicate arrow icon bug on gender selection dropdown
+- 🎨 **Custom Dropdown UI**: Dropdown with fade-in animation, hover effects, and styling consistent with website theme
+- ⌨️ **Keyboard Support**: Support for Escape key to close dropdown
+
+**Version 1.4** - Update with:
+- 🎨 **Comprehensive UI/UX Improvements**: Overall design interface and user experience enhancements
+- ✨ **Typography & Spacing**: Improved readability with better system fonts, optimal line-height, and more natural spacing
+- 🎭 **Animations & Transitions**: Smoother transitions with cubic-bezier easing for more natural interactions
+- 🎯 **Visual Hierarchy**: Multi-layer shadows and better depth for clearer visual hierarchy
+- 🖱️ **Micro-interactions**: More responsive and human-like hover effects, focus states, and active states
+- 📐 **Form Improvements**: Input fields with clearer focus states, custom select dropdown, and better scrollbar styling
+- 🎴 **Card Designs**: Smoother hover effects, consistent border radius, and better visual feedback
 
 **Version 1.3** - Update with:
 - 🎯 **Bulk Gender Selection**: Dropdown to select gender (Male/Female/None) that will be applied to all participants added in bulk
