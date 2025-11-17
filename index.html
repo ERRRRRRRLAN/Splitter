@@ -1306,6 +1306,14 @@
                             class="form-input" 
                             placeholder="Masukkan nama peserta, satu per baris."
                             rows="4"></textarea>
+                        <div style="margin-top: 8px;">
+                            <label class="form-label" id="bulkGenderLabel" style="font-size: 0.9rem; margin-bottom: 6px;">Pilih Jenis Kelamin</label>
+                            <select id="bulkGenderSelect" class="form-input" style="width: 100%;">
+                                <option value="">Tidak ada</option>
+                                <option value="putra">Putra</option>
+                                <option value="putri">Putri</option>
+                            </select>
+                        </div>
                         <button class="btn btn-outline" id="addBulkParticipants" style="margin-top: 8px;">
                             Tambah Semua Peserta
                         </button>
@@ -1468,6 +1476,10 @@
                 addParticipant: 'Tambah Peserta',
                 bulkAddParticipant: 'Tambah Peserta Secara Bulk',
                 bulkAddPlaceholder: 'Masukkan nama peserta, satu per baris.',
+                bulkGenderLabel: 'Pilih Jenis Kelamin',
+                bulkGenderNone: 'Tidak ada',
+                bulkGenderMale: 'Putra',
+                bulkGenderFemale: 'Putri',
                 addAllParticipants: 'Tambah Semua Peserta',
                 generateGroups: 'Buat Kelompok',
                 updateGroups: 'Update Kelompok',
@@ -1571,6 +1583,10 @@
                 addParticipant: 'Add Participant',
                 bulkAddParticipant: 'Add Participants in Bulk',
                 bulkAddPlaceholder: 'Enter participant names, one per line.',
+                bulkGenderLabel: 'Select Gender',
+                bulkGenderNone: 'None',
+                bulkGenderMale: 'Male',
+                bulkGenderFemale: 'Female',
                 addAllParticipants: 'Add All Participants',
                 generateGroups: 'Create Groups',
                 updateGroups: 'Update Groups',
@@ -1758,6 +1774,20 @@
             
             const bulkInput = document.getElementById('bulkParticipantInput');
             if (bulkInput) bulkInput.placeholder = t('bulkAddPlaceholder');
+            
+            const bulkGenderLabel = document.getElementById('bulkGenderLabel');
+            if (bulkGenderLabel) bulkGenderLabel.textContent = t('bulkGenderLabel');
+            
+            const bulkGenderSelect = document.getElementById('bulkGenderSelect');
+            if (bulkGenderSelect) {
+                const currentValue = bulkGenderSelect.value;
+                bulkGenderSelect.innerHTML = `
+                    <option value="">${t('bulkGenderNone')}</option>
+                    <option value="putra">${t('bulkGenderMale')}</option>
+                    <option value="putri">${t('bulkGenderFemale')}</option>
+                `;
+                bulkGenderSelect.value = currentValue;
+            }
             
             const addBulkBtn = document.getElementById('addBulkParticipants');
             if (addBulkBtn) addBulkBtn.textContent = t('addAllParticipants');
@@ -2106,12 +2136,16 @@
         // Add bulk participants
         function addBulkParticipants() {
             const bulkInput = document.getElementById('bulkParticipantInput');
+            const bulkGenderSelect = document.getElementById('bulkGenderSelect');
             const text = bulkInput.value.trim();
             
             if (!text) {
                 showAlert(t('alertEnterParticipant'), 'error');
                 return;
             }
+            
+            // Get selected gender from dropdown
+            const selectedGender = bulkGenderSelect.value || '';
             
             // Split by newlines and filter out empty lines
             const names = text.split('\n')
@@ -2123,9 +2157,9 @@
                 return;
             }
             
-            // Add each name as a participant
+            // Add each name as a participant with selected gender
             names.forEach(name => {
-                participants.push({ name: name, gender: '' });
+                participants.push({ name: name, gender: selectedGender });
             });
             
             // Clear the textarea
