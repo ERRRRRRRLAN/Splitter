@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Splitter</title>
+    <script>
+        // Prevent scroll restoration on page load
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        // Scroll to top immediately
+        window.scrollTo(0, 0);
+        // Also ensure scroll is at top after page fully loads
+        window.addEventListener('load', function() {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        });
+    </script>
     <style>
         * {
             margin: 0;
@@ -12,11 +26,14 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', Arial, sans-serif;
             background: linear-gradient(135deg, #f5f6f7 0%, #eef1f3 100%);
             min-height: 100vh;
             padding: 20px;
             color: #333;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         @media (max-width: 480px) {
@@ -47,27 +64,31 @@
         }
 
         .language-switcher button {
-            padding: 8px 16px;
+            padding: 9px 18px;
             border: 2px solid #5a6c7d;
             background: white;
             color: #5a6c7d;
             font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-            min-height: 36px;
+            border-radius: 6px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 38px;
+            letter-spacing: 0.01em;
         }
 
         .language-switcher button:hover {
             background: #5a6c7d;
             color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(90, 108, 125, 0.2);
         }
 
         .language-switcher button.active {
             background: #2c3e50;
             color: white;
             border-color: #2c3e50;
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -81,18 +102,23 @@
         }
 
         .header h1 {
-            font-size: 2rem;
-            margin-bottom: 8px;
+            font-size: 2.25rem;
+            margin-bottom: 10px;
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: #2c3e50;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
         }
 
         .header p {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: #555;
+            font-weight: 400;
+            letter-spacing: 0.01em;
         }
 
         .main-content {
@@ -183,18 +209,26 @@
         .card {
             background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
             border: 1px solid #e1e8ed;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+            padding: 28px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(44, 62, 80, 0.06), 0 1px 3px rgba(44, 62, 80, 0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 16px rgba(44, 62, 80, 0.1), 0 2px 6px rgba(44, 62, 80, 0.06);
+            transform: translateY(-1px);
         }
 
         .card-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 20px;
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 22px;
             color: #2c3e50;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             position: relative;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
         }
 
         .card-title::after {
@@ -202,10 +236,15 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
+            width: 60px;
             height: 3px;
             background: linear-gradient(90deg, #2c3e50 0%, #34495e 100%);
             border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .card:hover .card-title::after {
+            width: 80px;
         }
 
         .form-group {
@@ -214,28 +253,35 @@
 
         .form-label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-weight: 500;
-            color: #333;
+            color: #2c3e50;
             font-size: 0.95rem;
+            letter-spacing: 0.01em;
         }
 
         .form-input {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #bdc3c7;
+            padding: 11px 14px;
+            border: 1.5px solid #d0d7de;
             background: #ffffff;
             font-size: 1rem;
             font-family: inherit;
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            border-radius: 6px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #2c3e50;
+        }
+
+        .form-input:hover {
+            border-color: #bdc3c7;
         }
 
         .form-input:focus {
             outline: none;
             border-color: #5a6c7d;
             background: #fafbfc;
-            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.08);
+            box-shadow: 0 0 0 4px rgba(90, 108, 125, 0.1);
+            transform: translateY(-1px);
         }
 
         textarea.form-input {
@@ -245,36 +291,174 @@
             min-height: 100px;
         }
 
+        /* Custom Dropdown */
+        .custom-dropdown {
+            position: relative;
+            width: 100%;
+        }
+
+        .custom-dropdown-toggle {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid #d0d7de;
+            background: #ffffff;
+            font-size: 1rem;
+            font-family: inherit;
+            border-radius: 6px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #2c3e50;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+        }
+
+        .custom-dropdown-toggle:hover {
+            border-color: #bdc3c7;
+        }
+
+        .custom-dropdown-toggle:focus {
+            outline: none;
+            border-color: #5a6c7d;
+            background: #fafbfc;
+            box-shadow: 0 0 0 4px rgba(90, 108, 125, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .custom-dropdown.active .custom-dropdown-toggle {
+            border-color: #5a6c7d;
+            background: #fafbfc;
+            box-shadow: 0 0 0 4px rgba(90, 108, 125, 0.1);
+        }
+
+        .custom-dropdown-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .custom-dropdown-arrow {
+            flex-shrink: 0;
+            margin-left: 12px;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .custom-dropdown.active .custom-dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .custom-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 1.5px solid #e1e8ed;
+            border-radius: 6px;
+            box-shadow: 0 4px 16px rgba(44, 62, 80, 0.15), 0 2px 6px rgba(44, 62, 80, 0.1);
+            z-index: 1000;
+            display: none;
+            overflow: hidden;
+            animation: dropdownFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .custom-dropdown.active .custom-dropdown-menu {
+            display: block;
+        }
+
+        @keyframes dropdownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .custom-dropdown-item {
+            padding: 11px 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+
+        .custom-dropdown-item:hover {
+            background: linear-gradient(to right, #f1f3f5 0%, #e9ecef 100%);
+            color: #2c3e50;
+        }
+
+        .custom-dropdown-item:first-child {
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .custom-dropdown-item:last-child {
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+
         .participant-list {
             max-height: 400px;
             overflow-y: auto;
             margin-bottom: 12px;
+            padding-right: 4px;
+        }
+
+        .participant-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .participant-list::-webkit-scrollbar-track {
+            background: #f1f3f5;
+            border-radius: 4px;
+        }
+
+        .participant-list::-webkit-scrollbar-thumb {
+            background: #bdc3c7;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+
+        .participant-list::-webkit-scrollbar-thumb:hover {
+            background: #95a5a6;
         }
 
         .participant-item {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             align-items: center;
-            padding: 8px;
+            padding: 10px 12px;
             background: linear-gradient(to right, #f8f9fa 0%, #f1f3f5 100%);
-            border: 1px solid #e1e8ed;
-            margin-bottom: 6px;
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            border: 1.5px solid #e1e8ed;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .participant-item:hover {
             background: linear-gradient(to right, #f1f3f5 0%, #e9ecef 100%);
             border-color: #5a6c7d;
+            transform: translateX(2px);
+            box-shadow: 0 2px 6px rgba(44, 62, 80, 0.08);
         }
 
         .participant-item input[type="text"] {
             flex: 1;
-            padding: 6px 10px;
-            border: 1px solid #c8d6e5;
+            padding: 7px 11px;
+            border: 1.5px solid #d0d7de;
             background: white;
             font-size: 0.9rem;
-            border-radius: 4px;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .participant-item input[type="text"]:focus {
+            outline: none;
+            border-color: #5a6c7d;
+            box-shadow: 0 0 0 3px rgba(90, 108, 125, 0.1);
         }
 
         .gender-radio-group {
@@ -287,26 +471,28 @@
         .gender-radio-item {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 7px;
             cursor: pointer;
-            padding: 6px 10px;
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            padding: 7px 12px;
+            border-radius: 6px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
             background: linear-gradient(to right, #f8f9fa 0%, #f1f3f5 100%);
-            min-height: 32px;
+            min-height: 36px;
         }
 
         .gender-radio-item:hover {
             background: linear-gradient(to right, #f1f3f5 0%, #e9ecef 100%);
             border-color: #5a6c7d;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.1);
         }
 
         .gender-radio-item:has(input[type="radio"]:checked) {
             background: linear-gradient(135deg, #e8edf3 0%, #d8e3ed 100%);
             border-color: #2c3e50;
-            box-shadow: 0 2px 6px rgba(44, 62, 80, 0.15);
+            box-shadow: 0 3px 8px rgba(44, 62, 80, 0.18);
+            transform: translateY(-1px);
         }
 
         .gender-radio-item input[type="radio"] {
@@ -333,17 +519,19 @@
         }
 
         .btn {
-            padding: 10px 20px;
-            border: 1px solid;
+            padding: 11px 22px;
+            border: 1.5px solid;
             font-size: 0.95rem;
-            font-weight: normal;
+            font-weight: 500;
             cursor: pointer;
             font-family: inherit;
             display: inline-block;
-            border-radius: 4px;
+            border-radius: 6px;
             min-height: 44px;
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.01em;
         }
 
         .btn-primary {
@@ -354,7 +542,13 @@
 
         .btn-primary:hover {
             background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.25);
+            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(44, 62, 80, 0.25);
         }
 
         .btn-secondary {
@@ -365,7 +559,13 @@
 
         .btn-secondary:hover {
             background: linear-gradient(135deg, #4a5a6a 0%, #5a6c7d 100%);
-            box-shadow: 0 2px 8px rgba(90, 108, 125, 0.25);
+            box-shadow: 0 4px 12px rgba(90, 108, 125, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(90, 108, 125, 0.25);
         }
 
         .btn-danger {
@@ -430,6 +630,12 @@
             background: linear-gradient(135deg, #f1f3f5 0%, #e9ecef 100%);
             border-color: #2c3e50;
             color: #2c3e50;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.15);
+        }
+
+        .btn-outline:active {
+            transform: translateY(0);
         }
 
         .btn:disabled {
@@ -455,15 +661,16 @@
         .group-card {
             background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
             border: 2px solid #e1e8ed;
-            padding: 18px;
-            border-radius: 6px;
-            box-shadow: 0 3px 10px rgba(44, 62, 80, 0.1);
-            transition: all 0.2s ease;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(44, 62, 80, 0.08), 0 1px 4px rgba(44, 62, 80, 0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .group-card:hover {
             border-color: #5a6c7d;
-            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.15);
+            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.12), 0 2px 8px rgba(44, 62, 80, 0.06);
+            transform: translateY(-2px);
         }
 
         .group-header {
@@ -488,22 +695,27 @@
             flex: 1;
             min-width: 0;
             max-width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #bdc3c7;
-            border-radius: 4px;
+            padding: 9px 13px;
+            border: 1.5px solid #d0d7de;
+            border-radius: 6px;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 600;
             background: white;
             color: #2c3e50;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             box-sizing: border-box;
+        }
+
+        .group-name-input:hover {
+            border-color: #bdc3c7;
         }
         
         .group-name-input:focus {
             outline: none;
             border-color: #5a6c7d;
             background: #fafbfc;
-            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.08);
+            box-shadow: 0 0 0 4px rgba(90, 108, 125, 0.1);
+            transform: translateY(-1px);
         }
 
         .group-stats {
@@ -518,15 +730,15 @@
         }
 
         .group-members li {
-            padding: 8px 10px;
+            padding: 10px 12px;
             background: linear-gradient(to right, #f8f9fa 0%, #f1f3f5 100%);
-            border: 1px solid #e1e8ed;
-            margin-bottom: 6px;
+            border: 1.5px solid #e1e8ed;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            border-radius: 6px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             min-width: 0;
             word-wrap: break-word;
         }
@@ -540,19 +752,22 @@
 
         .group-members li:hover {
             background: linear-gradient(to right, #f1f3f5 0%, #e9ecef 100%);
-            transform: translateX(3px);
+            transform: translateX(4px);
+            box-shadow: 0 2px 6px rgba(44, 62, 80, 0.08);
+            border-color: #5a6c7d;
         }
 
         .gender-badge {
-            padding: 3px 8px;
+            padding: 4px 10px;
             font-size: 0.75rem;
-            font-weight: normal;
+            font-weight: 500;
             background: linear-gradient(135deg, #ecf0f1 0%, #d5dbdb 100%);
             color: #2c3e50;
-            border: 1px solid #bdc3c7;
-            border-radius: 3px;
+            border: 1.5px solid #bdc3c7;
+            border-radius: 5px;
             flex-shrink: 0;
             white-space: nowrap;
+            letter-spacing: 0.02em;
         }
 
         .stats-summary {
@@ -564,29 +779,34 @@
 
         .stat-card {
             background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
-            padding: 15px;
-            border: 1px solid #e1e8ed;
+            padding: 18px;
+            border: 1.5px solid #e1e8ed;
             text-align: center;
-            border-radius: 6px;
-            box-shadow: 0 2px 6px rgba(44, 62, 80, 0.08);
-            transition: all 0.2s ease;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06), 0 1px 3px rgba(44, 62, 80, 0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(44, 62, 80, 0.12), 0 2px 6px rgba(44, 62, 80, 0.06);
+            border-color: #5a6c7d;
         }
 
         .stat-value {
-            font-size: 1.8rem;
-            font-weight: bold;
+            font-size: 1.9rem;
+            font-weight: 700;
             color: #2c3e50;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
         }
 
         .stat-label {
             font-size: 0.85rem;
             color: #666;
-            margin-top: 5px;
+            margin-top: 6px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
         }
 
         .loading {
@@ -627,17 +847,17 @@
         }
 
         .alert {
-            padding: 12px 16px;
+            padding: 14px 18px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            border: 1px solid;
-            border-radius: 4px;
+            gap: 12px;
+            border: 1.5px solid;
+            border-radius: 8px;
             min-width: 280px;
             max-width: 400px;
             pointer-events: auto;
-            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.15);
-            animation: slideInRight 0.3s ease-out;
+            box-shadow: 0 4px 16px rgba(44, 62, 80, 0.15), 0 2px 6px rgba(44, 62, 80, 0.1);
+            animation: slideInRight 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes slideInRight {
@@ -689,11 +909,17 @@
 
         .empty-state {
             text-align: center;
-            padding: 40px;
-            color: #999;
+            padding: 45px;
+            color: #7f8c8d;
             background: linear-gradient(135deg, #fafafa 0%, #f5f9fa 100%);
             border: 2px dashed #bdc3c7;
-            border-radius: 6px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .empty-state:hover {
+            border-color: #95a5a6;
+            background: linear-gradient(135deg, #f5f9fa 0%, #f0f4f7 100%);
         }
 
         .checkbox-group {
@@ -727,12 +953,18 @@
         .min-gender-inputs {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 12px;
-            padding: 15px;
+            gap: 14px;
+            margin-top: 14px;
+            padding: 18px;
             background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
-            border: 1px solid #e1e8ed;
-            border-radius: 6px;
+            border: 1.5px solid #e1e8ed;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .min-gender-inputs:hover {
+            border-color: #5a6c7d;
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
         }
 
         .min-gender-inputs.hidden {
@@ -741,9 +973,14 @@
 
         .action-buttons {
             display: flex;
-            gap: 8px;
-            margin-top: 18px;
+            gap: 10px;
+            margin-top: 20px;
             flex-wrap: wrap;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            min-width: 120px;
         }
 
         /* Mobile portrait */
@@ -1308,11 +1545,19 @@
                             rows="4"></textarea>
                         <div style="margin-top: 8px;">
                             <label class="form-label" id="bulkGenderLabel" style="font-size: 0.9rem; margin-bottom: 6px;">Pilih Jenis Kelamin</label>
-                            <select id="bulkGenderSelect" class="form-input" style="width: 100%;">
-                                <option value="">Tidak ada</option>
-                                <option value="putra">Putra</option>
-                                <option value="putri">Putri</option>
-                            </select>
+                            <div class="custom-dropdown" id="bulkGenderDropdown" data-value="">
+                                <button type="button" class="custom-dropdown-toggle" id="bulkGenderToggle">
+                                    <span class="custom-dropdown-text" id="bulkGenderText">Tidak ada</span>
+                                    <svg class="custom-dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6 9L1 4H11L6 9Z" fill="#2c3e50"/>
+                                    </svg>
+                                </button>
+                                <div class="custom-dropdown-menu" id="bulkGenderMenu">
+                                    <div class="custom-dropdown-item" data-value="">Tidak ada</div>
+                                    <div class="custom-dropdown-item" data-value="putra">Putra</div>
+                                    <div class="custom-dropdown-item" data-value="putri">Putri</div>
+                                </div>
+                            </div>
                         </div>
                         <button class="btn btn-outline" id="addBulkParticipants" style="margin-top: 8px;">
                             Tambah Semua Peserta
@@ -1682,6 +1927,7 @@
         let lastGeneratedParticipants = []; // Snapshot of participants when groups were last generated
         let isUpdateMode = false; // Track if we're in update mode
         let dataTitle = ''; // Default title (empty, will use "Untitled" if not filled)
+        let isInitialLoad = true; // Track if this is the initial page load
 
         // Helper function to get translation
         function t(key, params = {}) {
@@ -1778,15 +2024,29 @@
             const bulkGenderLabel = document.getElementById('bulkGenderLabel');
             if (bulkGenderLabel) bulkGenderLabel.textContent = t('bulkGenderLabel');
             
-            const bulkGenderSelect = document.getElementById('bulkGenderSelect');
-            if (bulkGenderSelect) {
-                const currentValue = bulkGenderSelect.value;
-                bulkGenderSelect.innerHTML = `
-                    <option value="">${t('bulkGenderNone')}</option>
-                    <option value="putra">${t('bulkGenderMale')}</option>
-                    <option value="putri">${t('bulkGenderFemale')}</option>
-                `;
-                bulkGenderSelect.value = currentValue;
+            // Update custom dropdown
+            const bulkGenderDropdown = document.getElementById('bulkGenderDropdown');
+            const bulkGenderMenu = document.getElementById('bulkGenderMenu');
+            if (bulkGenderMenu) {
+                const currentValue = bulkGenderDropdown ? bulkGenderDropdown.getAttribute('data-value') || '' : '';
+                const items = bulkGenderMenu.querySelectorAll('.custom-dropdown-item');
+                if (items.length >= 3) {
+                    items[0].textContent = t('bulkGenderNone');
+                    items[1].textContent = t('bulkGenderMale');
+                    items[2].textContent = t('bulkGenderFemale');
+                }
+                
+                // Update displayed text
+                const bulkGenderText = document.getElementById('bulkGenderText');
+                if (bulkGenderText) {
+                    if (currentValue === 'putra') {
+                        bulkGenderText.textContent = t('bulkGenderMale');
+                    } else if (currentValue === 'putri') {
+                        bulkGenderText.textContent = t('bulkGenderFemale');
+                    } else {
+                        bulkGenderText.textContent = t('bulkGenderNone');
+                    }
+                }
             }
             
             const addBulkBtn = document.getElementById('addBulkParticipants');
@@ -2060,6 +2320,26 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            // Ensure scroll is at top on page load (multiple methods for compatibility)
+            window.scrollTo(0, 0);
+            if (document.documentElement) {
+                document.documentElement.scrollTop = 0;
+            }
+            if (document.body) {
+                document.body.scrollTop = 0;
+            }
+            
+            // Use requestAnimationFrame to ensure scroll happens after render
+            requestAnimationFrame(function() {
+                window.scrollTo(0, 0);
+                if (document.documentElement) {
+                    document.documentElement.scrollTop = 0;
+                }
+                if (document.body) {
+                    document.body.scrollTop = 0;
+                }
+            });
+            
             // Initialize UI with current language
             updateUI();
             
@@ -2067,12 +2347,21 @@
             handleGenderOptionsChange();
             
             if (participants.length === 0) {
-                addParticipant();
+                // Don't focus on initial load to prevent auto-scroll
+                addParticipant(false);
             } else {
                 renderParticipants();
             }
             updateInfo();
             
+            // Initialize custom dropdown
+            initCustomDropdown();
+            
+            // Mark initial load as complete after a short delay
+            setTimeout(function() {
+                isInitialLoad = false;
+            }, 500);
+
             // Event listeners
             document.getElementById('addParticipant').addEventListener('click', addParticipant);
             document.getElementById('addBulkParticipants').addEventListener('click', addBulkParticipants);
@@ -2118,25 +2407,78 @@
         });
 
         // Add participant
-        function addParticipant() {
+        function addParticipant(shouldFocus = true) {
             participants.push({ name: '', gender: '' });
             renderParticipants();
             updateInfo();
             
-            // Focus on new input
-            const newIndex = participants.length - 1;
-            setTimeout(() => {
-                const nameInput = document.querySelector(`input[data-index="${newIndex}"]`);
-                if (nameInput) {
-                    nameInput.focus();
+            // Focus on new input only if not initial load and shouldFocus is true
+            if (shouldFocus && !isInitialLoad) {
+                const newIndex = participants.length - 1;
+                setTimeout(() => {
+                    const nameInput = document.querySelector(`input[data-index="${newIndex}"]`);
+                    if (nameInput) {
+                        nameInput.focus();
+                        // Ensure scroll stays at top after focus
+                        requestAnimationFrame(function() {
+                            window.scrollTo(0, 0);
+                        });
+                    }
+                }, 100);
+            }
+        }
+
+        // Initialize custom dropdown
+        function initCustomDropdown() {
+            const dropdown = document.getElementById('bulkGenderDropdown');
+            if (!dropdown) return;
+            
+            const toggle = document.getElementById('bulkGenderToggle');
+            const menu = document.getElementById('bulkGenderMenu');
+            const items = menu.querySelectorAll('.custom-dropdown-item');
+
+            // Toggle dropdown
+            toggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+
+            // Select item
+            items.forEach(item => {
+                item.addEventListener('click', function() {
+                    const value = this.getAttribute('data-value');
+                    const text = this.textContent;
+                    
+                    document.getElementById('bulkGenderText').textContent = text;
+                    dropdown.setAttribute('data-value', value);
+                    dropdown.classList.remove('active');
+                });
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
                 }
-            }, 100);
+            });
+
+            // Close dropdown on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && dropdown.classList.contains('active')) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        }
+
+        // Get selected gender from custom dropdown
+        function getBulkGenderValue() {
+            const dropdown = document.getElementById('bulkGenderDropdown');
+            return dropdown ? dropdown.getAttribute('data-value') || '' : '';
         }
 
         // Add bulk participants
         function addBulkParticipants() {
             const bulkInput = document.getElementById('bulkParticipantInput');
-            const bulkGenderSelect = document.getElementById('bulkGenderSelect');
             const text = bulkInput.value.trim();
             
             if (!text) {
@@ -2144,8 +2486,8 @@
                 return;
             }
             
-            // Get selected gender from dropdown
-            const selectedGender = bulkGenderSelect.value || '';
+            // Get selected gender from custom dropdown
+            const selectedGender = getBulkGenderValue();
             
             // Split by newlines and filter out empty lines
             const names = text.split('\n')
